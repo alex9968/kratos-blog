@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package shop.interface.v1;
+package moment.interface.v1;
 
 import "google/api/annotations.proto";
 
-option go_package = "api/shop/interface/v1;v1";
+option go_package = "api/moment/interface/v1;v1";
 
 
-service ShopInterface {
+service MomentInterface {
     rpc Register (RegisterReq) returns (RegisterReply) {
         option (google.api.http) = {
             post: "/v1/register"
@@ -72,15 +72,15 @@ service ShopInterface {
         };
     }
 
-    rpc ListBeer (ListBeerReq) returns (ListBeerReply) {
+    rpc ListTag (ListTagReq) returns (ListTagReply) {
         option (google.api.http) = {
-            get: "/v1/catalog/beers"
+            get: "/v1/catalog/tags"
         };
     }
 
-    rpc GetBeer (GetBeerReq) returns (GetBeerReply) {
+    rpc GetTag (GetTagReq) returns (GetTagReply) {
         option (google.api.http) = {
-            get: "/v1/catalog/beers/{id}"
+            get: "/v1/catalog/tags/{id}"
         };
     }
 
@@ -263,20 +263,20 @@ message DeleteCardReply {
 }
 
 
-message ListBeerReq {
+message ListTagReq {
     int64 page_num = 1;
     int64 page_size = 2;
 }
 
-message ListBeerReply {
+message ListTagReply {
 
 }
 
-message GetBeerReq {
+message GetTagReq {
     int64 id = 1;
 }
 
-message GetBeerReply {
+message GetTagReply {
 
 }
 

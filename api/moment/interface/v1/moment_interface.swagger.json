@@ -1,12 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "v1/shop_interface.proto",
+    "title": "api/moment/interface/v1/moment_interface.proto",
     "version": "version not set"
   },
   "tags": [
     {
-      "name": "ShopInterface"
+      "name": "MomentInterface"
     }
   ],
   "consumes": [
@@ -18,7 +18,7 @@
   "paths": {
     "/v1/cart": {
       "get": {
-        "operationId": "ShopInterface_ListCartItem",
+        "operationId": "MomentInterface_ListCartItem",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -35,14 +35,14 @@
         },
         "parameters": [
           {
-            "name": "pageNum",
+            "name": "page_num",
             "in": "query",
             "required": false,
             "type": "string",
             "format": "int64"
           },
           {
-            "name": "pageSize",
+            "name": "page_size",
             "in": "query",
             "required": false,
             "type": "string",
@@ -50,11 +50,11 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       },
       "post": {
-        "operationId": "ShopInterface_AddCartItem",
+        "operationId": "MomentInterface_AddCartItem",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -80,18 +80,18 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       }
     },
-    "/v1/catalog/beers": {
+    "/v1/catalog/tags": {
       "get": {
-        "operationId": "ShopInterface_ListBeer",
+        "operationId": "MomentInterface_ListTag",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1ListBeerReply"
+              "$ref": "#/definitions/v1ListTagReply"
             }
           },
           "default": {
@@ -103,14 +103,14 @@
         },
         "parameters": [
           {
-            "name": "pageNum",
+            "name": "page_num",
             "in": "query",
             "required": false,
             "type": "string",
             "format": "int64"
           },
           {
-            "name": "pageSize",
+            "name": "page_size",
             "in": "query",
             "required": false,
             "type": "string",
@@ -118,18 +118,18 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       }
     },
-    "/v1/catalog/beers/{id}": {
+    "/v1/catalog/tags/{id}": {
       "get": {
-        "operationId": "ShopInterface_GetBeer",
+        "operationId": "MomentInterface_GetTag",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/v1GetBeerReply"
+              "$ref": "#/definitions/v1GetTagReply"
             }
           },
           "default": {
@@ -149,13 +149,13 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       }
     },
     "/v1/login": {
       "post": {
-        "operationId": "ShopInterface_Login",
+        "operationId": "MomentInterface_Login",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -181,13 +181,13 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       }
     },
     "/v1/logout": {
       "post": {
-        "operationId": "ShopInterface_Logout",
+        "operationId": "MomentInterface_Logout",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -203,13 +203,13 @@
           }
         },
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       }
     },
     "/v1/orders": {
       "get": {
-        "operationId": "ShopInterface_ListOrder",
+        "operationId": "MomentInterface_ListOrder",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -226,14 +226,14 @@
         },
         "parameters": [
           {
-            "name": "pageNum",
+            "name": "page_num",
             "in": "query",
             "required": false,
             "type": "string",
             "format": "int64"
           },
           {
-            "name": "pageSize",
+            "name": "page_size",
             "in": "query",
             "required": false,
             "type": "string",
@@ -241,11 +241,11 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       },
       "post": {
-        "operationId": "ShopInterface_CreateOrder",
+        "operationId": "MomentInterface_CreateOrder",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -271,13 +271,13 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       }
     },
     "/v1/register": {
       "post": {
-        "operationId": "ShopInterface_Register",
+        "operationId": "MomentInterface_Register",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -303,13 +303,13 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       }
     },
     "/v1/user/addresses": {
       "get": {
-        "operationId": "ShopInterface_ListAddress",
+        "operationId": "MomentInterface_ListAddress",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -334,11 +334,11 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       },
       "post": {
-        "operationId": "ShopInterface_CreateAddress",
+        "operationId": "MomentInterface_CreateAddress",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -364,13 +364,13 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       }
     },
     "/v1/user/addresses/{id}": {
       "get": {
-        "operationId": "ShopInterface_GetAddress",
+        "operationId": "MomentInterface_GetAddress",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -395,13 +395,13 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       }
     },
     "/v1/user/cards": {
       "get": {
-        "operationId": "ShopInterface_ListCard",
+        "operationId": "MomentInterface_ListCard",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -426,11 +426,11 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       },
       "post": {
-        "operationId": "ShopInterface_CreateCard",
+        "operationId": "MomentInterface_CreateCard",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -456,13 +456,13 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       }
     },
     "/v1/user/cards/{id}": {
       "get": {
-        "operationId": "ShopInterface_GetCard",
+        "operationId": "MomentInterface_GetCard",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -487,11 +487,11 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       },
       "delete": {
-        "operationId": "ShopInterface_DeleteCard",
+        "operationId": "MomentInterface_DeleteCard",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -516,7 +516,7 @@
           }
         ],
         "tags": [
-          "ShopInterface"
+          "MomentInterface"
         ]
       }
     }
@@ -544,7 +544,7 @@
         "address": {
           "type": "string"
         },
-        "postCode": {
+        "post_code": {
           "type": "string"
         }
       }
@@ -556,7 +556,7 @@
           "type": "string",
           "format": "int64"
         },
-        "cardNo": {
+        "card_no": {
           "type": "string"
         },
         "ccv": {
@@ -570,7 +570,7 @@
     "protobufAny": {
       "type": "object",
       "properties": {
-        "typeUrl": {
+        "type_url": {
           "type": "string"
         },
         "value": {
@@ -625,7 +625,7 @@
         "address": {
           "type": "string"
         },
-        "postCode": {
+        "post_code": {
           "type": "string"
         }
       }
@@ -652,7 +652,7 @@
         "address": {
           "type": "string"
         },
-        "postCode": {
+        "post_code": {
           "type": "string"
         }
       }
@@ -673,7 +673,7 @@
           "type": "string",
           "format": "int64"
         },
-        "cardNo": {
+        "card_no": {
           "type": "string"
         },
         "ccv": {
@@ -720,13 +720,10 @@
         "address": {
           "type": "string"
         },
-        "postCode": {
+        "post_code": {
           "type": "string"
         }
       }
-    },
-    "v1GetBeerReply": {
-      "type": "object"
     },
     "v1GetCardReply": {
       "type": "object",
@@ -735,7 +732,7 @@
           "type": "string",
           "format": "int64"
         },
-        "cardNo": {
+        "card_no": {
           "type": "string"
         },
         "ccv": {
@@ -745,6 +742,9 @@
           "type": "string"
         }
       }
+    },
+    "v1GetTagReply": {
+      "type": "object"
     },
     "v1ListAddressReply": {
       "type": "object",
@@ -756,9 +756,6 @@
           }
         }
       }
-    },
-    "v1ListBeerReply": {
-      "type": "object"
     },
     "v1ListCardReply": {
       "type": "object",
@@ -775,6 +772,9 @@
       "type": "object"
     },
     "v1ListOrderReply": {
+      "type": "object"
+    },
+    "v1ListTagReply": {
       "type": "object"
     },
     "v1LoginReply": {
