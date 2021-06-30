@@ -11,7 +11,7 @@ import (
 var ProviderSet = wire.NewSet(NewMomentInterface)
 
 type MomentInterface struct {
-	v1.UnimplementedShopInterfaceServer
+	v1.UnimplementedMomentInterfaceServer
 
 	uc *biz.UserUseCase
 

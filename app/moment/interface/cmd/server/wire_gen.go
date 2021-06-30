@@ -6,11 +6,11 @@
 package main
 
 import (
-	"github.com/go-kratos/beer-shop/app/shop/interface/internal/biz"
-	"github.com/go-kratos/beer-shop/app/shop/interface/internal/conf"
-	"github.com/go-kratos/beer-shop/app/shop/interface/internal/data"
-	"github.com/go-kratos/beer-shop/app/shop/interface/internal/server"
-	"github.com/go-kratos/beer-shop/app/shop/interface/internal/service"
+	"github.com/go-kratos/beer-shop/app/moment/interface/internal/biz"
+	"github.com/go-kratos/beer-shop/app/moment/interface/internal/conf"
+	"github.com/go-kratos/beer-shop/app/moment/interface/internal/data"
+	"github.com/go-kratos/beer-shop/app/moment/interface/internal/server"
+	"github.com/go-kratos/beer-shop/app/moment/interface/internal/service"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	"go.opentelemetry.io/otel/sdk/trace"
@@ -22,15 +22,13 @@ import (
 func initApp(confServer *conf.Server, registry *conf.Registry, confData *conf.Data, logger log.Logger, tracerProvider *trace.TracerProvider) (*kratos.App, func(), error) {
 	discovery := data.NewDiscovery(registry)
 	userClient := data.NewUserServiceClient(discovery, tracerProvider)
-	cartClient := data.NewCartServiceClient(discovery, tracerProvider)
-	catalogClient := data.NewCatalogServiceClient(discovery, tracerProvider)
-	dataData, err := data.NewData(confData, logger, userClient, cartClient, catalogClient)
+	dataData, err := data.NewData(confData, logger, userClient)
 	if err != nil {
 		return nil, nil, err
 	}
 	userRepo := data.NewUserRepo(dataData, logger)
 	userUseCase := biz.NewUserUseCase(userRepo, logger)
-	shopInterface := service.NewShopInterface(userUseCase, logger)
+	shopInterface := service.NewMomentInterface(userUseCase, logger)
 	httpServer := server.NewHTTPServer(confServer, logger, tracerProvider, shopInterface)
 	grpcServer := server.NewGRPCServer(confServer, logger, tracerProvider, shopInterface)
 	app := newApp(logger, httpServer, grpcServer)
