@@ -11,7 +11,8 @@ type Image struct {
 }
 
 type Tag struct {
-	Id          int64
+	Id         uint
+	UserId          uint
 	Name        string
 	Description string
 	Count       int64

@@ -4,9 +4,9 @@ import (
 	"context"
 
 	"github.com/go-kratos/beer-shop/app/moment/interface/internal/biz"
+	"github.com/go-kratos/beer-shop/pkg/util/pagination"
 	"github.com/go-kratos/kratos/v2/log"
-
-	ctV1 "github.com/go-kratos/beer-shop/api/moment/interface/service/v1"
+	"gorm.io/gorm"
 )
 
 var _ biz.TagRepo = (*tagRepo)(nil)
@@ -16,6 +16,19 @@ type tagRepo struct {
 	log  *log.Helper
 }
 
+type Image struct {
+	URL string
+}
+
+type Tag struct {
+	gorm.Model
+	UserId     uint
+	Name        string
+	Description string
+	Count       int64
+	Images      []Image
+}
+
 func NewTagRepo(data *Data, logger log.Logger) biz.TagRepo {
 	return &tagRepo{
 		data: data,
@@ -23,46 +36,56 @@ func NewTagRepo(data *Data, logger log.Logger) biz.TagRepo {
 	}
 }
 
-func (r *tagRepo) GetTag(ctx context.Context, id int64) (*biz.Tag, error) {
-	reply, err := r.data.bc.GetTag(ctx, &ctV1.GetTagReq{
-		Id: id,
-	})
-	if err != nil {
-		return nil, err
+
+func (tr *tagRepo) CreateTag(ctx context.Context, b *biz.Tag) (*biz.Tag, error) {
+	t := Tag{Model: gorm.Model{ID: b.Id}, UserId: b.UserId}
+	result := tr.data.db.WithContext(ctx).Create(t)
+	return &biz.Tag{
+		Id: t.ID,
+	}, result.Error
+}
+
+func (tr *tagRepo) GetTag(ctx context.Context, id int64) (*biz.Tag, error) {
+	t := Tag{}
+	result := tr.data.db.WithContext(ctx).First(&t, id)
+	return &biz.Tag{
+		Id: t.ID,
+	}, result.Error
+}
+
+func (r *tagRepo) UpdateTag(ctx context.Context, b *biz.Tag) (*biz.Tag, error) {
+	t := Tag{}
+	result := r.data.db.WithContext(ctx).First(&t, b.Id)
+	if result.Error != nil {
+		return nil, result.Error
 	}
-	images := make([]biz.Image, 0)
-	for _, x := range reply.Image {
-		images = append(images, biz.Image{URL: x.Url})
+	t.UserId = b.UserId
+	result = r.data.db.WithContext(ctx).Save(&t)
+	if result.Error != nil {
+		return nil, result.Error
 	}
 	return &biz.Tag{
-		Id:          reply.Id,
-		Name:        reply.Name,
-		Description: reply.Description,
-		Count:       reply.Count,
-		Images:      images,
-	}, err
+		Id: t.ID,
+	}, nil
 }
 
 func (r *tagRepo) ListTag(ctx context.Context, pageNum, pageSize int64) ([]*biz.Tag, error) {
-	reply, err := r.data.bc.ListTag(ctx, &ctV1.ListTagReq{
-		PageNum:  pageNum,
-		PageSize: pageSize,
-	})
-	if err != nil {
-		return nil, err
+	var ts []Tag
+	result := r.data.db.WithContext(ctx).
+		Limit(int(pageSize)).
+		Offset(int(pagination.GetPageOffset(pageNum, pageSize))).
+		Find(&ts)
+	if result.Error != nil {
+		return nil, result.Error
 	}
 	rv := make([]*biz.Tag, 0)
-	for _, x := range reply.Results {
-		images := make([]biz.Image, 0)
-		for _, img := range x.Image {
-			images = append(images, biz.Image{URL: img.Url})
-		}
+	for _, t := range ts {
 		rv = append(rv, &biz.Tag{
-			Id:          x.Id,
-			Description: x.Description,
-			Count:       x.Count,
-			Images:      images,
+			Id: t.ID,
 		})
 	}
-	return rv, err
+	return rv, nil
 }
+
+
+

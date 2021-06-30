@@ -53,3 +53,46 @@ func (rp *userRepo) Login(ctx context.Context, u *biz.User) (string, error) {
 func (rp *userRepo) Logout(ctx context.Context, u *biz.User) error {
 	return nil
 }
+
+
+func (rp *userRepo) GetUsers(ctx context.Context,id int64) (*biz.User, error) {
+	reply, err := rp.data.uc.GetUser(ctx, &usV1.GetUserReq{
+		Id: id,
+	})
+	if err != nil {
+		return nil, err
+	}
+	// images := make([]biz.Image, 0)
+	// for _, x := range reply.Image {
+	// 	images = append(images, biz.Image{URL: x.Url})
+	// }
+	return &biz.User{
+		Id:          reply.Id,
+	}, err
+}
+//
+// func (r *userRepo) ListTag(ctx context.Context, pageNum, pageSize int64) ([]*biz.Tag, error) {
+// 	reply, err := r.data.bc.ListTag(ctx, &ctV1.ListTagReq{
+// 		PageNum:  pageNum,
+// 		PageSize: pageSize,
+// 	})
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	rv := make([]*biz.Tag, 0)
+// 	for _, x := range reply.Results {
+// 		images := make([]biz.Image, 0)
+// 		for _, img := range x.Image {
+// 			images = append(images, biz.Image{URL: img.Url})
+// 		}
+// 		rv = append(rv, &biz.Tag{
+// 			Id:          x.Id,
+// 			Description: x.Description,
+// 			Count:       x.Count,
+// 			Images:      images,
+// 		})
+// 	}
+// 	return rv, err
+// }
+//
+//
