@@ -3,6 +3,7 @@ syntax = "proto3";
 package moment.interface.v1;
 
 import "google/api/annotations.proto";
+import "validate/validate.proto";
 
 option go_package = "api/moment/interface/v1;v1";
 
@@ -112,8 +113,8 @@ service MomentInterface {
 }
 
 message RegisterReq {
-    string username = 1;
-    string password = 2;
+    string username = 1 [(validate.rules).string.min_len = 5];
+    string password = 2 [(validate.rules).string.max_len = 6];
 }
 
 message RegisterReply {

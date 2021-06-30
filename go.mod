@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	entgo.io/ent v0.7.0
+	github.com/envoyproxy/protoc-gen-validate v0.6.1 // indirect
 	github.com/fatih/color v1.12.0 // indirect
 	github.com/go-kratos/consul v0.0.0-20210425141546-e047a9f6ec87
 	github.com/go-kratos/kratos/cmd/protoc-gen-go-errors/v2 v2.0.0-20210629115548-a639340274c0 // indirect
