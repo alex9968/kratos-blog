@@ -1,7 +1,7 @@
 # User Service
 
 ## build
-go build -o ./bin/ ./app/user/service/cmd/server/...
+go build -o ./bin/user ./app/user/service/cmd/server/...
 
 
 ## run
