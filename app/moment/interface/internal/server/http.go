@@ -47,7 +47,7 @@ func NewHTTPServer(c *conf.Server, logger log.Logger, tp *tracesdk.TracerProvide
 	}
 	srv := http.NewServer(opts...)
 
-	v1.RegisterShopInterfaceHTTPServer(srv, s)
+	v1.RegisterMomentInterfaceHTTPServer(srv, s)
 	return srv
 }
 

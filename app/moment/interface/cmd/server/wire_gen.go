@@ -28,9 +28,9 @@ func initApp(confServer *conf.Server, registry *conf.Registry, confData *conf.Da
 	}
 	userRepo := data.NewUserRepo(dataData, logger)
 	userUseCase := biz.NewUserUseCase(userRepo, logger)
-	shopInterface := service.NewMomentInterface(userUseCase, logger)
-	httpServer := server.NewHTTPServer(confServer, logger, tracerProvider, shopInterface)
-	grpcServer := server.NewGRPCServer(confServer, logger, tracerProvider, shopInterface)
+	momentInterface := service.NewMomentInterface(userUseCase, logger)
+	httpServer := server.NewHTTPServer(confServer, logger, tracerProvider, momentInterface)
+	grpcServer := server.NewGRPCServer(confServer, logger, tracerProvider, momentInterface)
 	app := newApp(logger, httpServer, grpcServer)
 	return app, func() {
 	}, nil

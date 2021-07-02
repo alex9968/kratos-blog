@@ -55,7 +55,16 @@ func (m *GetUserReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	if m.GetId() <= 0 {
+		err := GetUserReqValidationError{
+			field:  "Id",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return GetUserReqMultiError(errors)
@@ -257,9 +266,27 @@ func (m *CreateUserReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Username
+	if utf8.RuneCountInString(m.GetUsername()) < 4 {
+		err := CreateUserReqValidationError{
+			field:  "Username",
+			reason: "value length must be at least 4 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for Password
+	if utf8.RuneCountInString(m.GetPassword()) < 4 {
+		err := CreateUserReqValidationError{
+			field:  "Password",
+			reason: "value length must be at least 4 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return CreateUserReqMultiError(errors)
@@ -463,9 +490,27 @@ func (m *VerifyPasswordReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Username
+	if utf8.RuneCountInString(m.GetUsername()) < 4 {
+		err := VerifyPasswordReqValidationError{
+			field:  "Username",
+			reason: "value length must be at least 4 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for Password
+	if utf8.RuneCountInString(m.GetPassword()) < 4 {
+		err := VerifyPasswordReqValidationError{
+			field:  "Password",
+			reason: "value length must be at least 4 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return VerifyPasswordReqMultiError(errors)
@@ -673,7 +718,16 @@ func (m *ListAddressReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Uid
+	if m.GetId() <= 0 {
+		err := ListAddressReqValidationError{
+			field:  "Id",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return ListAddressReqMultiError(errors)
@@ -907,11 +961,30 @@ func (m *CreateAddressReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Uid
+	if m.GetUid() <= 0 {
+		err := CreateAddressReqValidationError{
+			field:  "Uid",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	// no validation rules for Name
 
-	// no validation rules for Mobile
+	if utf8.RuneCountInString(m.GetMobile()) != 11 {
+		err := CreateAddressReqValidationError{
+			field:  "Mobile",
+			reason: "value length must be 11 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+
+	}
 
 	// no validation rules for Country
 
@@ -1135,7 +1208,16 @@ func (m *GetAddressReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	if m.GetId() <= 0 {
+		err := GetAddressReqValidationError{
+			field:  "Id",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return GetAddressReqMultiError(errors)
@@ -1349,7 +1431,16 @@ func (m *ListCardReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Uid
+	if m.GetUid() <= 0 {
+		err := ListCardReqValidationError{
+			field:  "Uid",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return ListCardReqMultiError(errors)
@@ -1582,7 +1673,16 @@ func (m *CreateCardReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Uid
+	if m.GetUid() <= 0 {
+		err := CreateCardReqValidationError{
+			field:  "Uid",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	// no validation rules for CardNo
 
@@ -1790,7 +1890,16 @@ func (m *GetCardReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Id
+	if m.GetId() <= 0 {
+		err := GetCardReqValidationError{
+			field:  "Id",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return GetCardReqMultiError(errors)
@@ -1996,7 +2105,16 @@ func (m *DeleteCardReq) validate(all bool) error {
 
 	var errors []error
 
-	// no validation rules for Uid
+	if m.GetUid() <= 0 {
+		err := DeleteCardReqValidationError{
+			field:  "Uid",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return DeleteCardReqMultiError(errors)

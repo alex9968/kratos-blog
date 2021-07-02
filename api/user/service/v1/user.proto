@@ -3,6 +3,8 @@ syntax = "proto3";
 package user.service.v1;
 
 import "google/api/annotations.proto";
+import "validate/validate.proto";
+
 
 option go_package = "api/user/service/v1;v1";
 
@@ -41,7 +43,7 @@ service User {
 }
 
 message GetUserReq {
-    int64 id = 1;
+    int64 id = 1 [(validate.rules).int64.gt = 0];
 }
 
 message GetUserReply {
@@ -50,8 +52,8 @@ message GetUserReply {
 }
 
 message CreateUserReq {
-    string username = 1;
-    string password = 2;
+    string username = 1 [(validate.rules).string.min_len = 4];
+    string password = 2 [(validate.rules).string.min_len = 4];
 }
 
 message CreateUserReply {
@@ -60,8 +62,8 @@ message CreateUserReply {
 }
 
 message VerifyPasswordReq {
-    string username = 1;
-    string password = 2;
+    string username = 1 [(validate.rules).string.min_len = 4];
+    string password = 2 [(validate.rules).string.min_len = 4];
 }
 
 message VerifyPasswordReply {
@@ -70,7 +72,7 @@ message VerifyPasswordReply {
 }
 
 message ListAddressReq {
-    int64 uid = 1;
+    int64 id = 1 [(validate.rules).int64.gt = 0];
 }
 
 message ListAddressReply {
@@ -87,9 +89,9 @@ message ListAddressReply {
 }
 
 message CreateAddressReq {
-    int64 uid = 1;
+    int64 uid = 1 [(validate.rules).int64.gt = 0];
     string name = 2;
-    string mobile = 3;
+    string mobile = 3 [(validate.rules).string.len = 11];
     string country = 4;
     string city = 5;
     string address = 6;
@@ -107,7 +109,7 @@ message CreateAddressReply {
 }
 
 message GetAddressReq {
-    int64 id = 1;
+    int64 id = 1  [(validate.rules).int64.gt = 0];
 }
 
 message GetAddressReply {
@@ -121,7 +123,7 @@ message GetAddressReply {
 }
 
 message ListCardReq {
-    int64 uid = 1;
+    int64 uid = 1  [(validate.rules).int64.gt = 0];
 }
 
 message ListCardReply {
@@ -135,7 +137,7 @@ message ListCardReply {
 }
 
 message CreateCardReq {
-    int64 uid = 1;
+    int64 uid = 1  [(validate.rules).int64.gt = 0];
     string card_no = 2;
     string ccv = 3;
     string expires = 4;
@@ -146,7 +148,7 @@ message CreateCardReply {
 }
 
 message GetCardReq {
-    int64 id = 1;
+    int64 id = 1  [(validate.rules).int64.gt = 0];
 }
 
 message GetCardReply {
@@ -157,7 +159,7 @@ message GetCardReply {
 }
 
 message DeleteCardReq {
-    int64 uid = 1;
+    int64 uid = 1  [(validate.rules).int64.gt = 0];
 }
 
 message DeleteCardReply {

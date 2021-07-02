@@ -13,7 +13,7 @@ func (s *MomentInterface) Register(ctx context.Context, req *v1.RegisterReq) (*v
 		Password: req.Password,
 	})
 	return &v1.RegisterReply{
-		Id: rv.Id,
+		Uid: rv.Id,
 	}, err
 }
 

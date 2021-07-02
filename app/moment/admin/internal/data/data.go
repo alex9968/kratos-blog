@@ -4,7 +4,7 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
 
-	"github.com/go-kratos/beer-shop/app/shop/admin/internal/conf"
+	"github.com/go-kratos/beer-shop/app/moment/admin/internal/conf"
 
 	// init mysql driver
 	_ "github.com/go-sql-driver/mysql"

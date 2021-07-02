@@ -5,13 +5,12 @@ import (
 	"github.com/go-kratos/beer-shop/app/user/service/internal/conf"
 	"github.com/go-kratos/beer-shop/app/user/service/internal/service"
 	"github.com/go-kratos/kratos/v2/log"
-	"go.opentelemetry.io/otel/propagation"
-	tracesdk "go.opentelemetry.io/otel/sdk/trace"
-
 	"github.com/go-kratos/kratos/v2/middleware/logging"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
+	"go.opentelemetry.io/otel/propagation"
+	tracesdk "go.opentelemetry.io/otel/sdk/trace"
 )
 
 // NewGRPCServer new a gRPC server.
@@ -39,5 +38,6 @@ func NewGRPCServer(c *conf.Server, logger log.Logger, tp *tracesdk.TracerProvide
 	}
 	srv := grpc.NewServer(opts...)
 	v1.RegisterUserServer(srv, s)
+	// reflection.Register(srv.Server)
 	return srv
 }

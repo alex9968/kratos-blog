@@ -31,7 +31,7 @@ func (s *UserService) GetAddress(ctx context.Context, req *v1.GetAddressReq) (*v
 }
 
 func (s *UserService) ListAddress(ctx context.Context, req *v1.ListAddressReq) (*v1.ListAddressReply, error) {
-	rv, err := s.ac.List(ctx, req.Uid)
+	rv, err := s.ac.List(ctx, req.Id)
 	rs := make([]*v1.ListAddressReply_Address, 0)
 	for _, x := range rv {
 		rs = append(rs, &v1.ListAddressReply_Address{
