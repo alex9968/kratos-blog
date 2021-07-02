@@ -6,12 +6,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"kratos-blog/app/comment/service/internal/biz"
+	"kratos-blog/app/comment/service/internal/data/ent/comment"
 	"time"
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/biz"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent/comment"
 )
 
 // CommentCreate is the builder for creating a Comment entity.

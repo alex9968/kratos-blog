@@ -5,12 +5,11 @@ package ent
 import (
 	"context"
 	"fmt"
+	"kratos-blog/app/comment/service/internal/biz"
+	"kratos-blog/app/comment/service/internal/data/ent/comment"
+	"kratos-blog/app/comment/service/internal/data/ent/predicate"
 	"sync"
 	"time"
-
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/biz"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent/comment"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent/predicate"
 
 	"entgo.io/ent"
 )

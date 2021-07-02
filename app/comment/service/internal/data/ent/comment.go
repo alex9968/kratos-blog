@@ -5,12 +5,12 @@ package ent
 import (
 	"encoding/json"
 	"fmt"
+	"kratos-blog/app/comment/service/internal/biz"
+	"kratos-blog/app/comment/service/internal/data/ent/comment"
 	"strings"
 	"time"
 
 	"entgo.io/ent/dialect/sql"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/biz"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent/comment"
 )
 
 // Comment is the model entity for the Comment schema.

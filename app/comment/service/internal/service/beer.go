@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	v1 "github.com/go-kratos/beer-shop/api/comment/service/v1"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/biz"
+	v1 "kratos-blog/api/comment/service/v1"
+	"kratos-blog/app/comment/service/internal/biz"
 )
 
 func (s *CommentService) CreateComment(ctx context.Context, req *v1.CreateCommentReq) (*v1.CreateCommentReply, error) {

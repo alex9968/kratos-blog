@@ -5,12 +5,12 @@ package ent
 import (
 	"context"
 	"fmt"
+	"kratos-blog/app/user/service/internal/data/ent/predicate"
+	"kratos-blog/app/user/service/internal/data/ent/user"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/predicate"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/user"
 )
 
 // UserDelete is the builder for deleting a User entity.

@@ -3,9 +3,9 @@ package data
 import (
 	"context"
 
-	"github.com/go-kratos/beer-shop/app/user/service/internal/biz"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/user"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/pkg/util"
+	"kratos-blog/app/user/service/internal/biz"
+	"kratos-blog/app/user/service/internal/data/ent/user"
+	"kratos-blog/app/user/service/internal/pkg/util"
 	"github.com/go-kratos/kratos/v2/log"
 )
 

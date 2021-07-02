@@ -4,10 +4,10 @@ import (
 	"context"
 	"errors"
 
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/biz"
+	"kratos-blog/app/moment/interface/internal/biz"
 	"github.com/go-kratos/kratos/v2/log"
 
-	usV1 "github.com/go-kratos/beer-shop/api/user/service/v1"
+	usV1 "kratos-blog/api/user/service/v1"
 )
 
 var _ biz.UserRepo = (*userRepo)(nil)

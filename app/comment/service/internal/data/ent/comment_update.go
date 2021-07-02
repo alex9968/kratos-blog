@@ -5,14 +5,14 @@ package ent
 import (
 	"context"
 	"fmt"
+	"kratos-blog/app/comment/service/internal/biz"
+	"kratos-blog/app/comment/service/internal/data/ent/comment"
+	"kratos-blog/app/comment/service/internal/data/ent/predicate"
 	"time"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/biz"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent/comment"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent/predicate"
 )
 
 // CommentUpdate is the builder for updating Comment entities.

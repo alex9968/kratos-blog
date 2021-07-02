@@ -6,7 +6,7 @@ import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
-	"github.com/go-kratos/beer-shop/app/order/service/internal/conf"
+	"kratos-blog/app/order/service/internal/conf"
 
 	// init mysql driver
 	_ "github.com/go-sql-driver/mysql"

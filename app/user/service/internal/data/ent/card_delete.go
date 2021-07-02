@@ -5,12 +5,12 @@ package ent
 import (
 	"context"
 	"fmt"
+	"kratos-blog/app/user/service/internal/data/ent/card"
+	"kratos-blog/app/user/service/internal/data/ent/predicate"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/card"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/predicate"
 )
 
 // CardDelete is the builder for deleting a Card entity.

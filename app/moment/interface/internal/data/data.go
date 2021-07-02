@@ -7,11 +7,11 @@ import (
 	"go.opentelemetry.io/otel/propagation"
 	"gorm.io/gorm"
 
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/conf"
+	"kratos-blog/app/moment/interface/internal/conf"
 
 	"context"
 
-	userv1 "github.com/go-kratos/beer-shop/api/user/service/v1"
+	userv1 "kratos-blog/api/user/service/v1"
 
 	consul "github.com/go-kratos/consul/registry"
 	"github.com/go-kratos/kratos/v2/registry"

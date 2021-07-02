@@ -1,8 +1,8 @@
 package service
 
 import (
-	v1 "github.com/go-kratos/beer-shop/api/moment/interface/v1"
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/biz"
+	v1 "kratos-blog/api/moment/interface/v1"
+	"kratos-blog/app/moment/interface/internal/biz"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
 )

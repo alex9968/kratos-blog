@@ -4,12 +4,12 @@ package ent
 
 import (
 	"fmt"
+	"kratos-blog/app/user/service/internal/data/ent/address"
+	"kratos-blog/app/user/service/internal/data/ent/user"
 	"strings"
 	"time"
 
 	"entgo.io/ent/dialect/sql"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/address"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/user"
 )
 
 // Address is the model entity for the Address schema.

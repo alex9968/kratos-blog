@@ -4,11 +4,11 @@ package ent
 
 import (
 	"fmt"
+	"kratos-blog/app/user/service/internal/data/ent/user"
 	"strings"
 	"time"
 
 	"entgo.io/ent/dialect/sql"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/user"
 )
 
 // User is the model entity for the User schema.

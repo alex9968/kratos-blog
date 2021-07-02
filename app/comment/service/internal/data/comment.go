@@ -3,11 +3,11 @@ package data
 import (
 	"context"
 
-	"github.com/go-kratos/beer-shop/pkg/util/pagination"
+	"kratos-blog/pkg/util/pagination"
 
 	"github.com/go-kratos/kratos/v2/log"
 
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/biz"
+	"kratos-blog/app/comment/service/internal/biz"
 )
 
 var _ biz.CommentRepo = (*commentRepo)(nil)

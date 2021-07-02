@@ -5,11 +5,11 @@
 package main
 
 import (
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/biz"
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/conf"
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/data"
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/server"
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/service"
+	"kratos-blog/app/moment/interface/internal/biz"
+	"kratos-blog/app/moment/interface/internal/conf"
+	"kratos-blog/app/moment/interface/internal/data"
+	"kratos-blog/app/moment/interface/internal/server"
+	"kratos-blog/app/moment/interface/internal/service"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"

@@ -3,10 +3,9 @@
 package ent
 
 import (
+	"kratos-blog/app/comment/service/internal/data/ent/comment"
+	"kratos-blog/app/comment/service/internal/data/ent/schema"
 	"time"
-
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent/comment"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent/schema"
 )
 
 // The init function reads all schema descriptors with runtime code

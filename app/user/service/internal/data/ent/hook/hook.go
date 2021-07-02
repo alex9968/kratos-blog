@@ -5,8 +5,7 @@ package hook
 import (
 	"context"
 	"fmt"
-
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent"
+	"kratos-blog/app/user/service/internal/data/ent"
 )
 
 // The AddressFunc type is an adapter to allow the use of ordinary

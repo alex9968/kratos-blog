@@ -6,13 +6,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"kratos-blog/app/comment/service/internal/data/ent/comment"
+	"kratos-blog/app/comment/service/internal/data/ent/predicate"
 	"math"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent/comment"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent/predicate"
 )
 
 // CommentQuery is the builder for querying Comment entities.

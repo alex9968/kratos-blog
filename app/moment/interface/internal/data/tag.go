@@ -3,8 +3,8 @@ package data
 import (
 	"context"
 
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/biz"
-	"github.com/go-kratos/beer-shop/pkg/util/pagination"
+	"kratos-blog/app/moment/interface/internal/biz"
+	"kratos-blog/pkg/util/pagination"
 	"github.com/go-kratos/kratos/v2/log"
 	"gorm.io/gorm"
 )

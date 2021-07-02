@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	v1 "github.com/go-kratos/beer-shop/api/moment/interface/v1"
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/biz"
+	v1 "kratos-blog/api/moment/interface/v1"
+	"kratos-blog/app/moment/interface/internal/biz"
 )
 
 func (s *MomentInterface) Register(ctx context.Context, req *v1.RegisterReq) (*v1.RegisterReply, error) {

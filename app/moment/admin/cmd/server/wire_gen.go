@@ -6,14 +6,14 @@
 package main
 
 import (
-	"github.com/go-kratos/beer-shop/app/moment/admin/internal/biz"
-	"github.com/go-kratos/beer-shop/app/moment/admin/internal/conf"
-	"github.com/go-kratos/beer-shop/app/moment/admin/internal/data"
-	"github.com/go-kratos/beer-shop/app/moment/admin/internal/server"
-	"github.com/go-kratos/beer-shop/app/moment/admin/internal/service"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	"go.opentelemetry.io/otel/sdk/trace"
+	"kratos-blog/app/moment/admin/internal/biz"
+	"kratos-blog/app/moment/admin/internal/conf"
+	"kratos-blog/app/moment/admin/internal/data"
+	"kratos-blog/app/moment/admin/internal/server"
+	"kratos-blog/app/moment/admin/internal/service"
 )
 
 // Injectors from wire.go:

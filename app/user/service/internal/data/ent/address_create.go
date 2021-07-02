@@ -6,12 +6,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"kratos-blog/app/user/service/internal/data/ent/address"
+	"kratos-blog/app/user/service/internal/data/ent/user"
 	"time"
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/address"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/user"
 )
 
 // AddressCreate is the builder for creating a Address entity.

@@ -1,9 +1,9 @@
 package server
 
 import (
-	"github.com/go-kratos/beer-shop/api/moment/admin/v1"
-	"github.com/go-kratos/beer-shop/app/moment/admin/internal/conf"
-	"github.com/go-kratos/beer-shop/app/moment/admin/internal/service"
+	"kratos-blog/api/moment/admin/v1"
+	"kratos-blog/app/moment/admin/internal/conf"
+	"kratos-blog/app/moment/admin/internal/service"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/logging"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"

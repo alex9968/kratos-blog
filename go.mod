@@ -1,4 +1,4 @@
-module github.com/go-kratos/beer-shop
+module kratos-blog
 
 go 1.15
 

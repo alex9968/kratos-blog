@@ -3,12 +3,12 @@ package data
 import (
 	"context"
 
-	"github.com/go-kratos/beer-shop/pkg/util/pagination"
+	"kratos-blog/pkg/util/pagination"
 	"gorm.io/gorm"
 
 	"github.com/go-kratos/kratos/v2/log"
 
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/biz"
+	"kratos-blog/app/moment/interface/internal/biz"
 )
 
 var _ biz.MomentRepo = (*momentRepo)(nil)

@@ -3,7 +3,7 @@ package biz
 import (
 	"context"
 
-	usV1 "github.com/go-kratos/beer-shop/api/user/service/v1"
+	usV1 "kratos-blog/api/user/service/v1"
 
 	consul "github.com/go-kratos/consul/registry"
 	"github.com/go-kratos/kratos/v2/registry"

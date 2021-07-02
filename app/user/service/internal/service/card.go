@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	v1 "github.com/go-kratos/beer-shop/api/user/service/v1"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/biz"
+	v1 "kratos-blog/api/user/service/v1"
+	"kratos-blog/app/user/service/internal/biz"
 )
 
 func (s *UserService) CreateCard(ctx context.Context, req *v1.CreateCardReq) (*v1.CreateCardReply, error) {

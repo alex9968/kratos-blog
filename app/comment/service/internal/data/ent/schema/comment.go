@@ -6,7 +6,7 @@ import (
 	"entgo.io/ent"
 	"entgo.io/ent/dialect"
 	"entgo.io/ent/schema/field"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/biz"
+	"kratos-blog/app/comment/service/internal/biz"
 )
 
 // Comment holds the schema definition for the Comment entity.

@@ -3,11 +3,11 @@ package data
 import (
 	"context"
 
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent"
+	"kratos-blog/app/comment/service/internal/data/ent"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
 
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/conf"
+	"kratos-blog/app/comment/service/internal/conf"
 
 	// init mysql driver
 	_ "github.com/go-sql-driver/mysql"

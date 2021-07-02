@@ -5,11 +5,11 @@
 package main
 
 import (
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/biz"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/conf"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/server"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/service"
+	"kratos-blog/app/comment/service/internal/biz"
+	"kratos-blog/app/comment/service/internal/conf"
+	"kratos-blog/app/comment/service/internal/data"
+	"kratos-blog/app/comment/service/internal/server"
+	"kratos-blog/app/comment/service/internal/service"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"

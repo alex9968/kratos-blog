@@ -1,9 +1,9 @@
 package server
 
 import (
-	v1 "github.com/go-kratos/beer-shop/api/comment/service/v1"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/conf"
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/service"
+	v1 "kratos-blog/api/comment/service/v1"
+	"kratos-blog/app/comment/service/internal/conf"
+	"kratos-blog/app/comment/service/internal/service"
 	"github.com/go-kratos/kratos/v2/log"
 	"go.opentelemetry.io/otel/propagation"
 	tracesdk "go.opentelemetry.io/otel/sdk/trace"

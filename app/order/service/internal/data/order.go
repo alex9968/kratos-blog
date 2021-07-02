@@ -4,12 +4,12 @@ import (
 	"context"
 	"time"
 
-	"github.com/go-kratos/beer-shop/pkg/util/pagination"
+	"kratos-blog/pkg/util/pagination"
 	"gorm.io/gorm"
 
 	"github.com/go-kratos/kratos/v2/log"
 
-	"github.com/go-kratos/beer-shop/app/order/service/internal/biz"
+	"kratos-blog/app/order/service/internal/biz"
 )
 
 var _ biz.OrderRepo = (*orderRepo)(nil)

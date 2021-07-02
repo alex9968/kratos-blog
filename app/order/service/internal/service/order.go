@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	v1 "github.com/go-kratos/beer-shop/api/order/service/v1"
-	"github.com/go-kratos/beer-shop/app/order/service/internal/biz"
+	v1 "kratos-blog/api/order/service/v1"
+	"kratos-blog/app/order/service/internal/biz"
 )
 
 func (s *OrderService) CreateOrder(ctx context.Context, req *v1.CreateOrderReq) (*v1.CreateOrderReply, error) {

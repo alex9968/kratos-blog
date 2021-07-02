@@ -6,13 +6,13 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"kratos-blog/app/user/service/internal/data/ent/address"
+	"kratos-blog/app/user/service/internal/data/ent/card"
+	"kratos-blog/app/user/service/internal/data/ent/user"
 	"time"
 
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/address"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/card"
-	"github.com/go-kratos/beer-shop/app/user/service/internal/data/ent/user"
 )
 
 // UserCreate is the builder for creating a User entity.

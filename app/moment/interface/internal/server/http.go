@@ -2,9 +2,9 @@ package server
 
 import (
 	"fmt"
-	"github.com/go-kratos/beer-shop/api/moment/interface/v1"
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/conf"
-	"github.com/go-kratos/beer-shop/app/moment/interface/internal/service"
+	"kratos-blog/api/moment/interface/v1"
+	"kratos-blog/app/moment/interface/internal/conf"
+	"kratos-blog/app/moment/interface/internal/service"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/gorilla/handlers"
 	"go.opentelemetry.io/otel/propagation"

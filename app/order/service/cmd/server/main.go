@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"github.com/go-kratos/beer-shop/app/order/service/internal/conf"
+	"kratos-blog/app/order/service/internal/conf"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"

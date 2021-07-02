@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent/migrate"
+	"kratos-blog/app/comment/service/internal/data/ent/migrate"
 
-	"github.com/go-kratos/beer-shop/app/comment/service/internal/data/ent/comment"
+	"kratos-blog/app/comment/service/internal/data/ent/comment"
 
 	"entgo.io/ent/dialect"
 	"entgo.io/ent/dialect/sql"
