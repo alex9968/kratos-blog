@@ -637,5 +637,5 @@ var MomentInterface_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "moment_interface.proto",
+	Metadata: "api/moment/interface/v1/moment_interface.proto",
 }

@@ -3,9 +3,8 @@
 ## build
 go build -o ./bin/user ./app/user/service/cmd/server/...
 
-
 ## run
-bin/server  -conf app/user/service/configs 
+bin/user  
 
 
 ## 打开grpc调试

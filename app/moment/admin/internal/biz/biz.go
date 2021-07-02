@@ -3,7 +3,6 @@ package biz
 import (
 	"context"
 
-	ctV1 "github.com/go-kratos/beer-shop/api/catalog/service/v1"
 	usV1 "github.com/go-kratos/beer-shop/api/user/service/v1"
 
 	consul "github.com/go-kratos/consul/registry"
@@ -18,7 +17,6 @@ var ProviderSet = wire.NewSet(
 	NewUserUseCase,
 	NewDiscovery,
 	NewUserServiceClient,
-	NewCatalogServiceClient,
 )
 
 func NewDiscovery() registry.Discovery {
@@ -42,16 +40,4 @@ func NewUserServiceClient(r registry.Discovery) usV1.UserClient {
 	return usV1.NewUserClient(conn)
 }
 
-
-func NewCatalogServiceClient(r registry.Discovery) ctV1.CatalogClient {
-	conn, err := grpc.DialInsecure(
-		context.Background(),
-		grpc.WithEndpoint("discovery:///default/beer.catalog.service"),
-		grpc.WithDiscovery(r),
-	)
-	if err != nil {
-		panic(err)
-	}
-	return ctV1.NewCatalogClient(conn)
-}
 

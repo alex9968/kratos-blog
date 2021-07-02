@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package comment.service.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "api/comment/service/v1;v1";
+
+
+service Comment {
+    rpc ListComment (ListCommentReq) returns (ListCommentReply) {
+    }
+
+    rpc CreateComment (CreateCommentReq) returns (CreateCommentReply) {
+    }
+
+    rpc GetComment (GetCommentReq) returns (GetCommentReply) {
+    }
+
+    rpc UpdateComment (UpdateCommentReq) returns (UpdateCommentReply) {
+    }
+
+    rpc DeleteComment (DeleteCommentReq) returns (DeleteCommentReply) {
+    }
+}
+
+
+message ListCommentReq {
+    int64 page_num = 1;
+    int64 page_size = 2;
+}
+
+message ListCommentReply {
+    message Comment {
+        message Image {
+            string url = 1;
+        }
+        int64 id = 1;
+        string name = 2;
+        string description = 3;
+        int64 count = 4;
+        repeated Image image = 5;
+    }
+    repeated Comment results = 1;
+}
+
+message CreateCommentReq {
+    message Image {
+        string url = 1;
+    }
+    string name = 1;
+    string description = 2;
+    int64 count = 3;
+    repeated Image image = 4;
+}
+
+message CreateCommentReply {
+    message Image {
+        string url = 1;
+    }
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+    int64 count = 4;
+    repeated Image image = 5;
+}
+
+message GetCommentReq {
+    int64 id = 1;
+}
+
+message GetCommentReply {
+    message Image {
+        string url = 1;
+    }
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+    int64 count = 4;
+    repeated Image image = 5;
+}
+
+message UpdateCommentReq {
+    message Image {
+        string url = 1;
+    }
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+    int64 count = 4;
+    repeated Image image = 5;
+}
+
+message UpdateCommentReply {
+    message Image {
+        string url = 1;
+    }
+    int64 id = 1;
+    string name = 2;
+    string description = 3;
+    int64 count = 4;
+    repeated Image image = 5;
+}
+
+message DeleteCommentReq {
+    int64 id = 1;
+}
+
+message DeleteCommentReply {
+}
