@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="app/user/service" type="GoApplicationRunConfiguration" factoryName="Go Application">
+    <module name="beer-shop" />
+    <working_directory value="$PROJECT_DIR$/app/user/service" />
+    <parameters value="-conf configs" />
+    <kind value="PACKAGE" />
+    <filePath value="$PROJECT_DIR$/app/user/service/cmd/server/main.go" />
+    <package value="kratos-blog/app/user/service/cmd/server" />
+    <directory value="$PROJECT_DIR$" />
+    <method v="2">
+      <option name="GoBeforeRunTask" command="generate ../../../api/user/service" />
+      <option name="GoBeforeRunTask" command="generate ." />
+    </method>
+  </configuration>
+</component>
