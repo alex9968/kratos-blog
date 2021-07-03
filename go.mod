@@ -3,7 +3,7 @@ module kratos-blog
 go 1.15
 
 require (
-	entgo.io/ent v0.7.0
+	entgo.io/ent v0.8.0
 	github.com/envoyproxy/protoc-gen-validate v0.6.1 // indirect
 	github.com/fatih/color v1.12.0 // indirect
 	github.com/fullstorydev/grpcui v1.1.0 // indirect

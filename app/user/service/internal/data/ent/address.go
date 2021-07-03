@@ -64,13 +64,13 @@ func (*Address) scanValues(columns []string) ([]interface{}, error) {
 	for i := range columns {
 		switch columns[i] {
 		case address.FieldID:
-			values[i] = &sql.NullInt64{}
+			values[i] = new(sql.NullInt64)
 		case address.FieldName, address.FieldMobile, address.FieldAddress, address.FieldPostCode:
-			values[i] = &sql.NullString{}
+			values[i] = new(sql.NullString)
 		case address.FieldCreatedAt, address.FieldUpdatedAt:
-			values[i] = &sql.NullTime{}
+			values[i] = new(sql.NullTime)
 		case address.ForeignKeys[0]: // user_addresses
-			values[i] = &sql.NullInt64{}
+			values[i] = new(sql.NullInt64)
 		default:
 			return nil, fmt.Errorf("unexpected column %q for type Address", columns[i])
 		}

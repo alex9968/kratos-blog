@@ -21,6 +21,7 @@ type AddressQuery struct {
 	config
 	limit      *int
 	offset     *int
+	unique     *bool
 	order      []OrderFunc
 	fields     []string
 	predicates []predicate.Address
@@ -47,6 +48,13 @@ func (aq *AddressQuery) Limit(limit int) *AddressQuery {
 // Offset adds an offset step to the query.
 func (aq *AddressQuery) Offset(offset int) *AddressQuery {
 	aq.offset = &offset
+	return aq
+}
+
+// Unique configures the query builder to filter duplicate records on query.
+// By default, unique is set to true, and can be disabled using this method.
+func (aq *AddressQuery) Unique(unique bool) *AddressQuery {
+	aq.unique = &unique
 	return aq
 }
 
@@ -377,11 +385,14 @@ func (aq *AddressQuery) sqlAll(ctx context.Context) ([]*Address, error) {
 		ids := make([]int64, 0, len(nodes))
 		nodeids := make(map[int64][]*Address)
 		for i := range nodes {
-			fk := nodes[i].user_addresses
-			if fk != nil {
-				ids = append(ids, *fk)
-				nodeids[*fk] = append(nodeids[*fk], nodes[i])
+			if nodes[i].user_addresses == nil {
+				continue
 			}
+			fk := *nodes[i].user_addresses
+			if _, ok := nodeids[fk]; !ok {
+				ids = append(ids, fk)
+			}
+			nodeids[fk] = append(nodeids[fk], nodes[i])
 		}
 		query.Where(user.IDIn(ids...))
 		neighbors, err := query.All(ctx)
@@ -428,6 +439,9 @@ func (aq *AddressQuery) querySpec() *sqlgraph.QuerySpec {
 		From:   aq.sql,
 		Unique: true,
 	}
+	if unique := aq.unique; unique != nil {
+		_spec.Unique = *unique
+	}
 	if fields := aq.fields; len(fields) > 0 {
 		_spec.Node.Columns = make([]string, 0, len(fields))
 		_spec.Node.Columns = append(_spec.Node.Columns, address.FieldID)
@@ -453,7 +467,7 @@ func (aq *AddressQuery) querySpec() *sqlgraph.QuerySpec {
 	if ps := aq.order; len(ps) > 0 {
 		_spec.Order = func(selector *sql.Selector) {
 			for i := range ps {
-				ps[i](selector, address.ValidColumn)
+				ps[i](selector)
 			}
 		}
 	}
@@ -472,7 +486,7 @@ func (aq *AddressQuery) sqlQuery(ctx context.Context) *sql.Selector {
 		p(selector)
 	}
 	for _, p := range aq.order {
-		p(selector, address.ValidColumn)
+		p(selector)
 	}
 	if offset := aq.offset; offset != nil {
 		// limit is mandatory for offset clause. We start
@@ -738,7 +752,7 @@ func (agb *AddressGroupBy) sqlQuery() *sql.Selector {
 	columns := make([]string, 0, len(agb.fields)+len(agb.fns))
 	columns = append(columns, agb.fields...)
 	for _, fn := range agb.fns {
-		columns = append(columns, fn(selector, address.ValidColumn))
+		columns = append(columns, fn(selector))
 	}
 	return selector.Select(columns...).GroupBy(agb.fields...)
 }

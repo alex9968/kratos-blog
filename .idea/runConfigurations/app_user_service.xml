@@ -2,7 +2,7 @@
   <configuration default="false" name="app/user/service" type="GoApplicationRunConfiguration" factoryName="Go Application">
     <module name="beer-shop" />
     <working_directory value="$PROJECT_DIR$/app/user/service" />
-    <parameters value="-conf configs" />
+    <parameters value="-conf ./configs" />
     <kind value="PACKAGE" />
     <filePath value="$PROJECT_DIR$/app/user/service/cmd/server/main.go" />
     <package value="kratos-blog/app/user/service/cmd/server" />

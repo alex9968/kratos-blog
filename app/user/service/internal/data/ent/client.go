@@ -202,7 +202,9 @@ func (c *AddressClient) DeleteOneID(id int64) *AddressDeleteOne {
 
 // Query returns a query builder for Address.
 func (c *AddressClient) Query() *AddressQuery {
-	return &AddressQuery{config: c.config}
+	return &AddressQuery{
+		config: c.config,
+	}
 }
 
 // Get returns a Address entity by its id.
@@ -306,7 +308,9 @@ func (c *CardClient) DeleteOneID(id int64) *CardDeleteOne {
 
 // Query returns a query builder for Card.
 func (c *CardClient) Query() *CardQuery {
-	return &CardQuery{config: c.config}
+	return &CardQuery{
+		config: c.config,
+	}
 }
 
 // Get returns a Card entity by its id.
@@ -410,7 +414,9 @@ func (c *UserClient) DeleteOneID(id int64) *UserDeleteOne {
 
 // Query returns a query builder for User.
 func (c *UserClient) Query() *UserQuery {
-	return &UserQuery{config: c.config}
+	return &UserQuery{
+		config: c.config,
+	}
 }
 
 // Get returns a User entity by its id.

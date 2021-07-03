@@ -63,6 +63,7 @@ var (
 		{Name: "id", Type: field.TypeInt64, Increment: true},
 		{Name: "username", Type: field.TypeString},
 		{Name: "password_hash", Type: field.TypeString},
+		{Name: "age", Type: field.TypeInt8, Nullable: true},
 		{Name: "created_at", Type: field.TypeTime, SchemaType: map[string]string{"mysql": "datetime"}},
 		{Name: "updated_at", Type: field.TypeTime, SchemaType: map[string]string{"mysql": "datetime"}},
 	}

@@ -38,6 +38,5 @@ func NewGRPCServer(c *conf.Server, logger log.Logger, tp *tracesdk.TracerProvide
 	}
 	srv := grpc.NewServer(opts...)
 	v1.RegisterUserServer(srv, s)
-	// reflection.Register(srv.Server)
 	return srv
 }
