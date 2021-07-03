@@ -17,7 +17,7 @@ var (
 		{Name: "post_code", Type: field.TypeString},
 		{Name: "created_at", Type: field.TypeTime, SchemaType: map[string]string{"mysql": "datetime"}},
 		{Name: "updated_at", Type: field.TypeTime, SchemaType: map[string]string{"mysql": "datetime"}},
-		{Name: "user_addresses", Type: field.TypeInt64, Nullable: true},
+		{Name: "owner_id", Type: field.TypeInt64, Nullable: true},
 	}
 	// AddressesTable holds the schema information for the "addresses" table.
 	AddressesTable = &schema.Table{
@@ -42,7 +42,7 @@ var (
 		{Name: "expires", Type: field.TypeString},
 		{Name: "created_at", Type: field.TypeTime, SchemaType: map[string]string{"mysql": "datetime"}},
 		{Name: "updated_at", Type: field.TypeTime, SchemaType: map[string]string{"mysql": "datetime"}},
-		{Name: "user_cards", Type: field.TypeInt64, Nullable: true},
+		{Name: "owner_id", Type: field.TypeInt64, Nullable: true},
 	}
 	// CardsTable holds the schema information for the "cards" table.
 	CardsTable = &schema.Table{

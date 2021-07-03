@@ -19,7 +19,7 @@ func (User) Fields() []ent.Field {
 	return []ent.Field{
 		field.Int64("id"),
 		field.String("username"),
-		field.String("password_hash"),
+		field.String("password_hash").Sensitive(),
 		field.Int8("age").Optional(),
 		field.Time("created_at").
 			Default(time.Now).SchemaType(map[string]string{
@@ -35,7 +35,10 @@ func (User) Fields() []ent.Field {
 // Edges of the User.
 func (User) Edges() []ent.Edge {
 	return []ent.Edge{
-		edge.To("addresses", Address.Type),
-		edge.To("cards", Card.Type),
+		edge.To("addresses", Address.Type).
+			StorageKey(edge.Column("owner_id")),
+		edge.To("cards", Card.Type).
+			StorageKey(edge.Column("owner_id")),
+
 	}
 }

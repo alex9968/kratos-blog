@@ -27,8 +27,9 @@ func (s *UserService) GetUser(ctx context.Context, req *v1.GetUserReq) (*v1.GetU
 }
 
 func (s *UserService) VerifyPassword(ctx context.Context, req *v1.VerifyPasswordReq) (*v1.VerifyPasswordReply, error) {
-	rv, err := s.uc.VerifyPassword(ctx, &biz.User{Username: req.Username, Password: req.Password})
+	id, err := s.uc.VerifyPassword(ctx, &biz.User{Username: req.Username, Password: req.Password})
 	return &v1.VerifyPasswordReply{
-		Ok: rv,
+		Ok: id != 0,
+		Id: id,
 	}, err
 }

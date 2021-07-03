@@ -44,13 +44,16 @@ func (r *userRepo) GetUser(ctx context.Context, id int64) (*biz.User, error) {
 	return &biz.User{Id: po.ID, Username: po.Username}, err
 }
 
-func (r *userRepo) VerifyPassword(ctx context.Context, u *biz.User) (bool, error) {
+func (r *userRepo) VerifyPassword(ctx context.Context, u *biz.User) (int64, error) {
 	po, err := r.data.db.User.
 		Query().
 		Where(user.UsernameEQ(u.Username)).
 		Only(ctx)
 	if err != nil {
-		return false, err
+		return 0, err
 	}
-	return util.CheckPasswordHash(u.Password, po.PasswordHash), nil
+	if util.CheckPasswordHash(u.Password, po.PasswordHash) {
+		return po.ID, nil
+	}
+	return 0, nil
 }

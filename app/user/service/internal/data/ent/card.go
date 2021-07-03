@@ -31,8 +31,8 @@ type Card struct {
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the CardQuery when eager-loading is set.
-	Edges      CardEdges `json:"edges"`
-	user_cards *int64
+	Edges    CardEdges `json:"edges"`
+	owner_id *int64
 }
 
 // CardEdges holds the relations/edges for other nodes in the graph.
@@ -69,7 +69,7 @@ func (*Card) scanValues(columns []string) ([]interface{}, error) {
 			values[i] = new(sql.NullString)
 		case card.FieldCreatedAt, card.FieldUpdatedAt:
 			values[i] = new(sql.NullTime)
-		case card.ForeignKeys[0]: // user_cards
+		case card.ForeignKeys[0]: // owner_id
 			values[i] = new(sql.NullInt64)
 		default:
 			return nil, fmt.Errorf("unexpected column %q for type Card", columns[i])
@@ -130,10 +130,10 @@ func (c *Card) assignValues(columns []string, values []interface{}) error {
 			}
 		case card.ForeignKeys[0]:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
-				return fmt.Errorf("unexpected type %T for edge-field user_cards", value)
+				return fmt.Errorf("unexpected type %T for edge-field owner_id", value)
 			} else if value.Valid {
-				c.user_cards = new(int64)
-				*c.user_cards = int64(value.Int64)
+				c.owner_id = new(int64)
+				*c.owner_id = int64(value.Int64)
 			}
 		}
 	}

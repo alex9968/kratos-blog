@@ -33,14 +33,14 @@ const (
 	// It exists in this package in order to avoid circular dependency with the "address" package.
 	AddressesInverseTable = "addresses"
 	// AddressesColumn is the table column denoting the addresses relation/edge.
-	AddressesColumn = "user_addresses"
+	AddressesColumn = "owner_id"
 	// CardsTable is the table the holds the cards relation/edge.
 	CardsTable = "cards"
 	// CardsInverseTable is the table name for the Card entity.
 	// It exists in this package in order to avoid circular dependency with the "card" package.
 	CardsInverseTable = "cards"
 	// CardsColumn is the table column denoting the cards relation/edge.
-	CardsColumn = "user_cards"
+	CardsColumn = "owner_id"
 )
 
 // Columns holds all SQL columns for user fields.

@@ -15,7 +15,7 @@ type User struct {
 type UserRepo interface {
 	CreateUser(ctx context.Context, u *User) (*User, error)
 	GetUser(ctx context.Context, id int64) (*User, error)
-	VerifyPassword(ctx context.Context, u *User) (bool, error)
+	VerifyPassword(ctx context.Context, u *User) (int64, error)
 }
 
 type UserUseCase struct {
@@ -35,6 +35,6 @@ func (uc *UserUseCase) Get(ctx context.Context, id int64) (*User, error) {
 	return uc.repo.GetUser(ctx, id)
 }
 
-func (uc *UserUseCase) VerifyPassword(ctx context.Context, u *User) (bool, error) {
+func (uc *UserUseCase) VerifyPassword(ctx context.Context, u *User) (int64, error) {
 	return uc.repo.VerifyPassword(ctx, u)
 }

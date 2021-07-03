@@ -31,8 +31,8 @@ type Address struct {
 	UpdatedAt time.Time `json:"updated_at,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the AddressQuery when eager-loading is set.
-	Edges          AddressEdges `json:"edges"`
-	user_addresses *int64
+	Edges    AddressEdges `json:"edges"`
+	owner_id *int64
 }
 
 // AddressEdges holds the relations/edges for other nodes in the graph.
@@ -69,7 +69,7 @@ func (*Address) scanValues(columns []string) ([]interface{}, error) {
 			values[i] = new(sql.NullString)
 		case address.FieldCreatedAt, address.FieldUpdatedAt:
 			values[i] = new(sql.NullTime)
-		case address.ForeignKeys[0]: // user_addresses
+		case address.ForeignKeys[0]: // owner_id
 			values[i] = new(sql.NullInt64)
 		default:
 			return nil, fmt.Errorf("unexpected column %q for type Address", columns[i])
@@ -130,10 +130,10 @@ func (a *Address) assignValues(columns []string, values []interface{}) error {
 			}
 		case address.ForeignKeys[0]:
 			if value, ok := values[i].(*sql.NullInt64); !ok {
-				return fmt.Errorf("unexpected type %T for edge-field user_addresses", value)
+				return fmt.Errorf("unexpected type %T for edge-field owner_id", value)
 			} else if value.Valid {
-				a.user_addresses = new(int64)
-				*a.user_addresses = int64(value.Int64)
+				a.owner_id = new(int64)
+				*a.owner_id = int64(value.Int64)
 			}
 		}
 	}

@@ -19,7 +19,7 @@ type User struct {
 	// Username holds the value of the "username" field.
 	Username string `json:"username,omitempty"`
 	// PasswordHash holds the value of the "password_hash" field.
-	PasswordHash string `json:"password_hash,omitempty"`
+	PasswordHash string `json:"-"`
 	// Age holds the value of the "age" field.
 	Age int8 `json:"age,omitempty"`
 	// CreatedAt holds the value of the "created_at" field.
@@ -162,8 +162,7 @@ func (u *User) String() string {
 	builder.WriteString(fmt.Sprintf("id=%v", u.ID))
 	builder.WriteString(", username=")
 	builder.WriteString(u.Username)
-	builder.WriteString(", password_hash=")
-	builder.WriteString(u.PasswordHash)
+	builder.WriteString(", password_hash=<sensitive>")
 	builder.WriteString(", age=")
 	builder.WriteString(fmt.Sprintf("%v", u.Age))
 	builder.WriteString(", created_at=")
