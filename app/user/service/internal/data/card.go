@@ -27,6 +27,7 @@ func (r *cardRepo) CreateCard(ctx context.Context, a *biz.Card) (*biz.Card, erro
 		Create().
 		SetCardNo(a.CardNo).
 		SetCcv(a.CCV).
+		SetName(a.Name).
 		SetExpires(a.Expires).
 		Save(ctx)
 	return &biz.Card{
@@ -65,4 +66,12 @@ func (r *cardRepo) ListCard(ctx context.Context, uid int64) ([]*biz.Card, error)
 		})
 	}
 	return rv, err
+}
+
+func (r *cardRepo) DeleteCard(ctx context.Context, uid int64) (bool, error) {
+	err := r.data.db.Card.DeleteOneID(uid).Exec(ctx)
+	if err != nil {
+		return false, err
+	}
+	return true, nil
 }

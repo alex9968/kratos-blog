@@ -12,6 +12,7 @@ func (s *UserService) CreateCard(ctx context.Context, req *v1.CreateCardReq) (*v
 		CardNo:  req.CardNo,
 		CCV:     req.Ccv,
 		Expires: req.Expires,
+		Name:    req.Name,
 	})
 	return &v1.CreateCardReply{
 		Id: rv.Id,
@@ -41,5 +42,14 @@ func (s *UserService) ListCard(ctx context.Context, req *v1.ListCardReq) (*v1.Li
 	}
 	return &v1.ListCardReply{
 		Results: rs,
+	}, err
+}
+
+func (s *UserService) DeleteCard(ctx context.Context, req *v1.DeleteCardReq) (*v1.DeleteCardReply, error) {
+	ok, err := s.cc.Delete(ctx, req.Uid)
+	if err != nil {
+	}
+	return &v1.DeleteCardReply{
+		Ok: ok,
 	}, err
 }

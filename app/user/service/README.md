@@ -1,10 +1,11 @@
 # User Service
 
 ## build
-go build -o ./bin/user ./app/user/service/cmd/server/...
+ go build -o ./bin/user ./app/user/service/cmd/server/...
+
 
 ## run
-bin/user  
+bin/user 
 
 
 ## 打开grpc调试
