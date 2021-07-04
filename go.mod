@@ -10,12 +10,15 @@ require (
 	github.com/go-kratos/consul v0.0.0-20210425141546-e047a9f6ec87
 	github.com/go-kratos/kratos/cmd/protoc-gen-go-errors/v2 v2.0.0-20210629115548-a639340274c0 // indirect
 	github.com/go-kratos/kratos/v2 v2.0.0-rc6
+	github.com/go-redis/redis/extra/redisotel v0.3.0 // indirect
+	github.com/go-redis/redis/v8 v8.11.0 // indirect
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/golang/protobuf v1.5.2
 	github.com/google/wire v0.5.0
 	github.com/gorilla/handlers v1.5.1
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.5.0 // indirect
 	github.com/hashicorp/consul/api v1.8.1
+	github.com/jinzhu/gorm v1.9.16 // indirect
 	github.com/klauspost/compress v1.11.7 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/mattn/go-isatty v0.0.13 // indirect
@@ -31,5 +34,5 @@ require (
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v2 v2.4.0
 	gorm.io/driver/mysql v1.0.6
-	gorm.io/gorm v1.21.9
+	gorm.io/gorm v1.21.11
 )

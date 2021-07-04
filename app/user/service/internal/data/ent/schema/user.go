@@ -18,7 +18,7 @@ type User struct {
 func (User) Fields() []ent.Field {
 	return []ent.Field{
 		field.Int64("id"),
-		field.String("username"),
+		field.String("username").Unique(),
 		field.String("password_hash").Sensitive(),
 		field.Int8("age").Optional(),
 		field.Time("created_at").
@@ -39,6 +39,5 @@ func (User) Edges() []ent.Edge {
 			StorageKey(edge.Column("owner_id")),
 		edge.To("cards", Card.Type).
 			StorageKey(edge.Column("owner_id")),
-
 	}
 }

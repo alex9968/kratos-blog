@@ -22,7 +22,7 @@ import (
 func initApp(confServer *conf.Server, registry *conf.Registry, confData *conf.Data, logger log.Logger, tracerProvider *trace.TracerProvider) (*kratos.App, func(), error) {
 	discovery := data.NewDiscovery(registry)
 	userClient := data.NewUserServiceClient(discovery, tracerProvider)
-	dataData, err := data.NewData(confData, logger, userClient)
+	dataData, cleanup, err := data.NewData(confData, logger, userClient)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -33,5 +33,6 @@ func initApp(confServer *conf.Server, registry *conf.Registry, confData *conf.Da
 	grpcServer := server.NewGRPCServer(confServer, logger, tracerProvider, momentInterface)
 	app := newApp(logger, httpServer, grpcServer)
 	return app, func() {
+		cleanup()
 	}, nil
 }

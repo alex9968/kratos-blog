@@ -3,15 +3,17 @@ trace:
 server:
   http:
     addr: 0.0.0.0:8100
-    timeout: 1s
+    timeout: 2s
   grpc:
     addr: 0.0.0.0:9100
-    timeout: 1s
+    timeout: 5s
 data:
   database:
     driver: mysql
-    source: root:dangerous@tcp(127.0.0.1:3306)/test
+    source: root:alex9968@tcp(127.0.0.1:3306)/kratos_moment?parseTime=true
   redis:
     addr: 127.0.0.1:6379
-    read_timeout: 0.2s
-    write_timeout: 0.2s
+    password:
+    dial_timeout: 1s
+    read_timeout: 0.4s
+    write_timeout: 0.6s

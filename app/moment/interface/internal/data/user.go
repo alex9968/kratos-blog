@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	"kratos-blog/app/moment/interface/internal/biz"
 	"github.com/go-kratos/kratos/v2/log"
+	"kratos-blog/app/moment/interface/internal/biz"
 
 	usV1 "kratos-blog/api/user/service/v1"
 )
@@ -29,7 +29,6 @@ func (rp *userRepo) Register(ctx context.Context, u *biz.User) (*biz.User, error
 		Username: u.Username,
 		Password: u.Password,
 	})
-
 	return &biz.User{
 		Id:       reply.Id,
 		Username: reply.Username,
@@ -54,8 +53,7 @@ func (rp *userRepo) Logout(ctx context.Context, u *biz.User) error {
 	return nil
 }
 
-
-func (rp *userRepo) GetUsers(ctx context.Context,id int64) (*biz.User, error) {
+func (rp *userRepo) GetUsers(ctx context.Context, id int64) (*biz.User, error) {
 	reply, err := rp.data.uc.GetUser(ctx, &usV1.GetUserReq{
 		Id: id,
 	})
@@ -67,9 +65,10 @@ func (rp *userRepo) GetUsers(ctx context.Context,id int64) (*biz.User, error) {
 	// 	images = append(images, biz.Image{URL: x.Url})
 	// }
 	return &biz.User{
-		Id:          reply.Id,
+		Id: reply.Id,
 	}, err
 }
+
 //
 // func (r *userRepo) ListTag(ctx context.Context, pageNum, pageSize int64) ([]*biz.Tag, error) {
 // 	reply, err := r.data.bc.ListTag(ctx, &ctV1.ListTagReq{
