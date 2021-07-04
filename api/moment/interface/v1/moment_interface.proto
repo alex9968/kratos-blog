@@ -73,41 +73,24 @@ service MomentInterface {
         };
     }
 
-    rpc ListTag (ListTagReq) returns (ListTagReply) {
-        option (google.api.http) = {
-            get: "/v1/catalog/tags"
-        };
-    }
 
-    rpc GetTag (GetTagReq) returns (GetTagReply) {
+    rpc CreateMoment (CreateMomentReq) returns (CreateMomentReply) {
         option (google.api.http) = {
-            get: "/v1/catalog/tags/{id}"
-        };
-    }
-
-    rpc ListCartItem (ListCartItemReq) returns (ListCartItemReply) {
-        option (google.api.http) = {
-            get: "/v1/cart"
-        };
-    }
-
-    rpc AddCartItem (AddCartItemReq) returns (AddCartItemReply) {
-        option (google.api.http) = {
-            post: "/v1/cart"
+            post: "/v1/moments"
             body: "*"
         };
     }
 
-    rpc CreateOrder (CreateOrderReq) returns (CreateOrderReply) {
+    rpc GetMoment(GetMomentReq) returns (GetMomentReply) {
         option (google.api.http) = {
-            post: "/v1/orders"
+            post: "/v1/moments"
             body: "*"
         };
     }
 
-    rpc ListOrder (ListOrderReq) returns (ListOrderReply) {
+    rpc ListMoment(ListMomentReq) returns (ListMomentReply) {
         option (google.api.http) = {
-            get: "/v1/orders"
+            get: "/v1/moments"
         };
     }
 }
@@ -263,53 +246,34 @@ message DeleteCardReply {
 }
 
 
-message ListTagReq {
-    int64 page_num = 1;
-    int64 page_size = 2;
+message CreateMomentReq {
+  string Content = 1;
 }
 
-message ListTagReply {
-
+message CreateMomentReply {
+  int64 id =1;
 }
 
-message GetTagReq {
+message GetMomentReq {
     int64 id = 1;
 }
 
-message GetTagReply {
-
+message GetMomentReply {
+    int64 id = 1;
+    int64 user_id = 2;
+    string content = 3;
 }
 
-message ListCartItemReq {
+message ListMomentReq {
     int64 page_num = 1;
     int64 page_size = 2;
 }
 
-message ListCartItemReply {
-
-}
-
-message AddCartItemReq {
-
-}
-
-message AddCartItemReply {
-
-}
-
-message CreateOrderReq {
-
-}
-
-message CreateOrderReply {
-
-}
-
-message ListOrderReq {
-    int64 page_num = 1;
-    int64 page_size = 2;
-}
-
-message ListOrderReply {
-
+message ListMomentReply {
+    message Moment {
+        int64 id = 1;
+        int64 user_id = 2;
+        string content = 3;
+    }
+    repeated Moment results = 1;
 }

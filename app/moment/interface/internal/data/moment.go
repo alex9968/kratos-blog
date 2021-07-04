@@ -33,7 +33,7 @@ func NewMomentRepo(data *Data, logger log.Logger) biz.MomentRepo {
 }
 
 func (r *momentRepo) CreateMoment(ctx context.Context, b *biz.Moment) (*biz.Moment, error) {
-	o := Moment{Id: b.Id, UserId: b.UserId}
+	o := Moment{Id: b.Id, UserId: b.UserId, Content: b.Content}
 	result := r.data.db.WithContext(ctx).Create(o)
 	return &biz.Moment{
 		Id: o.Id,

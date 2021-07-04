@@ -35,6 +35,7 @@ var ProviderSet = wire.NewSet(
 	NewDiscovery,
 	NewUserServiceClient,
 	NewUserRepo,
+	NewMomentRepo,
 )
 
 // Data .
@@ -67,7 +68,7 @@ func NewData(conf *conf.Data, logger klog.Logger, uc userv1.UserClient) (*Data, 
 		return nil, nil, err
 	}
 
-	if err := db.AutoMigrate(&Moment{}); err != nil {
+	if err := db.AutoMigrate(&Moment{}, &Tag{}); err != nil {
 		panic(err)
 	}
 

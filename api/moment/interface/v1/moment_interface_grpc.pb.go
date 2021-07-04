@@ -28,12 +28,9 @@ type MomentInterfaceClient interface {
 	CreateCard(ctx context.Context, in *CreateCardReq, opts ...grpc.CallOption) (*CreateCardReply, error)
 	GetCard(ctx context.Context, in *GetCardReq, opts ...grpc.CallOption) (*GetCardReply, error)
 	DeleteCard(ctx context.Context, in *DeleteCardReq, opts ...grpc.CallOption) (*DeleteCardReply, error)
-	ListTag(ctx context.Context, in *ListTagReq, opts ...grpc.CallOption) (*ListTagReply, error)
-	GetTag(ctx context.Context, in *GetTagReq, opts ...grpc.CallOption) (*GetTagReply, error)
-	ListCartItem(ctx context.Context, in *ListCartItemReq, opts ...grpc.CallOption) (*ListCartItemReply, error)
-	AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*AddCartItemReply, error)
-	CreateOrder(ctx context.Context, in *CreateOrderReq, opts ...grpc.CallOption) (*CreateOrderReply, error)
-	ListOrder(ctx context.Context, in *ListOrderReq, opts ...grpc.CallOption) (*ListOrderReply, error)
+	CreateMoment(ctx context.Context, in *CreateMomentReq, opts ...grpc.CallOption) (*CreateMomentReply, error)
+	GetMoment(ctx context.Context, in *GetMomentReq, opts ...grpc.CallOption) (*GetMomentReply, error)
+	ListMoment(ctx context.Context, in *ListMomentReq, opts ...grpc.CallOption) (*ListMomentReply, error)
 }
 
 type momentInterfaceClient struct {
@@ -134,54 +131,27 @@ func (c *momentInterfaceClient) DeleteCard(ctx context.Context, in *DeleteCardRe
 	return out, nil
 }
 
-func (c *momentInterfaceClient) ListTag(ctx context.Context, in *ListTagReq, opts ...grpc.CallOption) (*ListTagReply, error) {
-	out := new(ListTagReply)
-	err := c.cc.Invoke(ctx, "/moment.interface.v1.MomentInterface/ListTag", in, out, opts...)
+func (c *momentInterfaceClient) CreateMoment(ctx context.Context, in *CreateMomentReq, opts ...grpc.CallOption) (*CreateMomentReply, error) {
+	out := new(CreateMomentReply)
+	err := c.cc.Invoke(ctx, "/moment.interface.v1.MomentInterface/CreateMoment", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *momentInterfaceClient) GetTag(ctx context.Context, in *GetTagReq, opts ...grpc.CallOption) (*GetTagReply, error) {
-	out := new(GetTagReply)
-	err := c.cc.Invoke(ctx, "/moment.interface.v1.MomentInterface/GetTag", in, out, opts...)
+func (c *momentInterfaceClient) GetMoment(ctx context.Context, in *GetMomentReq, opts ...grpc.CallOption) (*GetMomentReply, error) {
+	out := new(GetMomentReply)
+	err := c.cc.Invoke(ctx, "/moment.interface.v1.MomentInterface/GetMoment", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *momentInterfaceClient) ListCartItem(ctx context.Context, in *ListCartItemReq, opts ...grpc.CallOption) (*ListCartItemReply, error) {
-	out := new(ListCartItemReply)
-	err := c.cc.Invoke(ctx, "/moment.interface.v1.MomentInterface/ListCartItem", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *momentInterfaceClient) AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...grpc.CallOption) (*AddCartItemReply, error) {
-	out := new(AddCartItemReply)
-	err := c.cc.Invoke(ctx, "/moment.interface.v1.MomentInterface/AddCartItem", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *momentInterfaceClient) CreateOrder(ctx context.Context, in *CreateOrderReq, opts ...grpc.CallOption) (*CreateOrderReply, error) {
-	out := new(CreateOrderReply)
-	err := c.cc.Invoke(ctx, "/moment.interface.v1.MomentInterface/CreateOrder", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *momentInterfaceClient) ListOrder(ctx context.Context, in *ListOrderReq, opts ...grpc.CallOption) (*ListOrderReply, error) {
-	out := new(ListOrderReply)
-	err := c.cc.Invoke(ctx, "/moment.interface.v1.MomentInterface/ListOrder", in, out, opts...)
+func (c *momentInterfaceClient) ListMoment(ctx context.Context, in *ListMomentReq, opts ...grpc.CallOption) (*ListMomentReply, error) {
+	out := new(ListMomentReply)
+	err := c.cc.Invoke(ctx, "/moment.interface.v1.MomentInterface/ListMoment", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -202,12 +172,9 @@ type MomentInterfaceServer interface {
 	CreateCard(context.Context, *CreateCardReq) (*CreateCardReply, error)
 	GetCard(context.Context, *GetCardReq) (*GetCardReply, error)
 	DeleteCard(context.Context, *DeleteCardReq) (*DeleteCardReply, error)
-	ListTag(context.Context, *ListTagReq) (*ListTagReply, error)
-	GetTag(context.Context, *GetTagReq) (*GetTagReply, error)
-	ListCartItem(context.Context, *ListCartItemReq) (*ListCartItemReply, error)
-	AddCartItem(context.Context, *AddCartItemReq) (*AddCartItemReply, error)
-	CreateOrder(context.Context, *CreateOrderReq) (*CreateOrderReply, error)
-	ListOrder(context.Context, *ListOrderReq) (*ListOrderReply, error)
+	CreateMoment(context.Context, *CreateMomentReq) (*CreateMomentReply, error)
+	GetMoment(context.Context, *GetMomentReq) (*GetMomentReply, error)
+	ListMoment(context.Context, *ListMomentReq) (*ListMomentReply, error)
 	mustEmbedUnimplementedMomentInterfaceServer()
 }
 
@@ -245,23 +212,14 @@ func (UnimplementedMomentInterfaceServer) GetCard(context.Context, *GetCardReq) 
 func (UnimplementedMomentInterfaceServer) DeleteCard(context.Context, *DeleteCardReq) (*DeleteCardReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCard not implemented")
 }
-func (UnimplementedMomentInterfaceServer) ListTag(context.Context, *ListTagReq) (*ListTagReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListTag not implemented")
+func (UnimplementedMomentInterfaceServer) CreateMoment(context.Context, *CreateMomentReq) (*CreateMomentReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateMoment not implemented")
 }
-func (UnimplementedMomentInterfaceServer) GetTag(context.Context, *GetTagReq) (*GetTagReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTag not implemented")
+func (UnimplementedMomentInterfaceServer) GetMoment(context.Context, *GetMomentReq) (*GetMomentReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMoment not implemented")
 }
-func (UnimplementedMomentInterfaceServer) ListCartItem(context.Context, *ListCartItemReq) (*ListCartItemReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCartItem not implemented")
-}
-func (UnimplementedMomentInterfaceServer) AddCartItem(context.Context, *AddCartItemReq) (*AddCartItemReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddCartItem not implemented")
-}
-func (UnimplementedMomentInterfaceServer) CreateOrder(context.Context, *CreateOrderReq) (*CreateOrderReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateOrder not implemented")
-}
-func (UnimplementedMomentInterfaceServer) ListOrder(context.Context, *ListOrderReq) (*ListOrderReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListOrder not implemented")
+func (UnimplementedMomentInterfaceServer) ListMoment(context.Context, *ListMomentReq) (*ListMomentReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMoment not implemented")
 }
 func (UnimplementedMomentInterfaceServer) mustEmbedUnimplementedMomentInterfaceServer() {}
 
@@ -456,110 +414,56 @@ func _MomentInterface_DeleteCard_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MomentInterface_ListTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListTagReq)
+func _MomentInterface_CreateMoment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateMomentReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MomentInterfaceServer).ListTag(ctx, in)
+		return srv.(MomentInterfaceServer).CreateMoment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/moment.interface.v1.MomentInterface/ListTag",
+		FullMethod: "/moment.interface.v1.MomentInterface/CreateMoment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MomentInterfaceServer).ListTag(ctx, req.(*ListTagReq))
+		return srv.(MomentInterfaceServer).CreateMoment(ctx, req.(*CreateMomentReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MomentInterface_GetTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTagReq)
+func _MomentInterface_GetMoment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMomentReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MomentInterfaceServer).GetTag(ctx, in)
+		return srv.(MomentInterfaceServer).GetMoment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/moment.interface.v1.MomentInterface/GetTag",
+		FullMethod: "/moment.interface.v1.MomentInterface/GetMoment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MomentInterfaceServer).GetTag(ctx, req.(*GetTagReq))
+		return srv.(MomentInterfaceServer).GetMoment(ctx, req.(*GetMomentReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MomentInterface_ListCartItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCartItemReq)
+func _MomentInterface_ListMoment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMomentReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MomentInterfaceServer).ListCartItem(ctx, in)
+		return srv.(MomentInterfaceServer).ListMoment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/moment.interface.v1.MomentInterface/ListCartItem",
+		FullMethod: "/moment.interface.v1.MomentInterface/ListMoment",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MomentInterfaceServer).ListCartItem(ctx, req.(*ListCartItemReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MomentInterface_AddCartItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddCartItemReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MomentInterfaceServer).AddCartItem(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/moment.interface.v1.MomentInterface/AddCartItem",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MomentInterfaceServer).AddCartItem(ctx, req.(*AddCartItemReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MomentInterface_CreateOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateOrderReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MomentInterfaceServer).CreateOrder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/moment.interface.v1.MomentInterface/CreateOrder",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MomentInterfaceServer).CreateOrder(ctx, req.(*CreateOrderReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MomentInterface_ListOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListOrderReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MomentInterfaceServer).ListOrder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/moment.interface.v1.MomentInterface/ListOrder",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MomentInterfaceServer).ListOrder(ctx, req.(*ListOrderReq))
+		return srv.(MomentInterfaceServer).ListMoment(ctx, req.(*ListMomentReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -612,28 +516,16 @@ var MomentInterface_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MomentInterface_DeleteCard_Handler,
 		},
 		{
-			MethodName: "ListTag",
-			Handler:    _MomentInterface_ListTag_Handler,
+			MethodName: "CreateMoment",
+			Handler:    _MomentInterface_CreateMoment_Handler,
 		},
 		{
-			MethodName: "GetTag",
-			Handler:    _MomentInterface_GetTag_Handler,
+			MethodName: "GetMoment",
+			Handler:    _MomentInterface_GetMoment_Handler,
 		},
 		{
-			MethodName: "ListCartItem",
-			Handler:    _MomentInterface_ListCartItem_Handler,
-		},
-		{
-			MethodName: "AddCartItem",
-			Handler:    _MomentInterface_AddCartItem_Handler,
-		},
-		{
-			MethodName: "CreateOrder",
-			Handler:    _MomentInterface_CreateOrder_Handler,
-		},
-		{
-			MethodName: "ListOrder",
-			Handler:    _MomentInterface_ListOrder_Handler,
+			MethodName: "ListMoment",
+			Handler:    _MomentInterface_ListMoment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

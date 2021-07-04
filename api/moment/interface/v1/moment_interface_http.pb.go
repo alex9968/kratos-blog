@@ -18,19 +18,16 @@ var _ = binding.EncodeURL
 const _ = http.SupportPackageIsVersion1
 
 type MomentInterfaceHTTPServer interface {
-	AddCartItem(context.Context, *AddCartItemReq) (*AddCartItemReply, error)
 	CreateAddress(context.Context, *CreateAddressReq) (*CreateAddressReply, error)
 	CreateCard(context.Context, *CreateCardReq) (*CreateCardReply, error)
-	CreateOrder(context.Context, *CreateOrderReq) (*CreateOrderReply, error)
+	CreateMoment(context.Context, *CreateMomentReq) (*CreateMomentReply, error)
 	DeleteCard(context.Context, *DeleteCardReq) (*DeleteCardReply, error)
 	GetAddress(context.Context, *GetAddressReq) (*GetAddressReply, error)
 	GetCard(context.Context, *GetCardReq) (*GetCardReply, error)
-	GetTag(context.Context, *GetTagReq) (*GetTagReply, error)
+	GetMoment(context.Context, *GetMomentReq) (*GetMomentReply, error)
 	ListAddress(context.Context, *ListAddressReq) (*ListAddressReply, error)
 	ListCard(context.Context, *ListCardReq) (*ListCardReply, error)
-	ListCartItem(context.Context, *ListCartItemReq) (*ListCartItemReply, error)
-	ListOrder(context.Context, *ListOrderReq) (*ListOrderReply, error)
-	ListTag(context.Context, *ListTagReq) (*ListTagReply, error)
+	ListMoment(context.Context, *ListMomentReq) (*ListMomentReply, error)
 	Login(context.Context, *LoginReq) (*LoginReply, error)
 	Logout(context.Context, *LogoutReq) (*LogoutReply, error)
 	Register(context.Context, *RegisterReq) (*RegisterReply, error)
@@ -48,12 +45,9 @@ func RegisterMomentInterfaceHTTPServer(s *http.Server, srv MomentInterfaceHTTPSe
 	r.POST("/v1/user/cards", _MomentInterface_CreateCard0_HTTP_Handler(srv))
 	r.GET("/v1/user/cards/{id}", _MomentInterface_GetCard0_HTTP_Handler(srv))
 	r.DELETE("/v1/user/cards/{id}", _MomentInterface_DeleteCard0_HTTP_Handler(srv))
-	r.GET("/v1/catalog/tags", _MomentInterface_ListTag0_HTTP_Handler(srv))
-	r.GET("/v1/catalog/tags/{id}", _MomentInterface_GetTag0_HTTP_Handler(srv))
-	r.GET("/v1/cart", _MomentInterface_ListCartItem0_HTTP_Handler(srv))
-	r.POST("/v1/cart", _MomentInterface_AddCartItem0_HTTP_Handler(srv))
-	r.POST("/v1/orders", _MomentInterface_CreateOrder0_HTTP_Handler(srv))
-	r.GET("/v1/orders", _MomentInterface_ListOrder0_HTTP_Handler(srv))
+	r.POST("/v1/moments", _MomentInterface_CreateMoment0_HTTP_Handler(srv))
+	r.POST("/v1/moments", _MomentInterface_GetMoment0_HTTP_Handler(srv))
+	r.GET("/v1/moments", _MomentInterface_ListMoment0_HTTP_Handler(srv))
 }
 
 func _MomentInterface_Register0_HTTP_Handler(srv MomentInterfaceHTTPServer) func(ctx http.Context) error {
@@ -255,137 +249,74 @@ func _MomentInterface_DeleteCard0_HTTP_Handler(srv MomentInterfaceHTTPServer) fu
 	}
 }
 
-func _MomentInterface_ListTag0_HTTP_Handler(srv MomentInterfaceHTTPServer) func(ctx http.Context) error {
+func _MomentInterface_CreateMoment0_HTTP_Handler(srv MomentInterfaceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in ListTagReq
+		var in CreateMomentReq
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/moment.interface.v1.MomentInterface/ListTag")
+		http.SetOperation(ctx, "/moment.interface.v1.MomentInterface/CreateMoment")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListTag(ctx, req.(*ListTagReq))
+			return srv.CreateMoment(ctx, req.(*CreateMomentReq))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListTagReply)
+		reply := out.(*CreateMomentReply)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _MomentInterface_GetTag0_HTTP_Handler(srv MomentInterfaceHTTPServer) func(ctx http.Context) error {
+func _MomentInterface_GetMoment0_HTTP_Handler(srv MomentInterfaceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in GetTagReq
+		var in GetMomentReq
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		if err := ctx.BindVars(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/moment.interface.v1.MomentInterface/GetTag")
+		http.SetOperation(ctx, "/moment.interface.v1.MomentInterface/GetMoment")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.GetTag(ctx, req.(*GetTagReq))
+			return srv.GetMoment(ctx, req.(*GetMomentReq))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*GetTagReply)
+		reply := out.(*GetMomentReply)
 		return ctx.Result(200, reply)
 	}
 }
 
-func _MomentInterface_ListCartItem0_HTTP_Handler(srv MomentInterfaceHTTPServer) func(ctx http.Context) error {
+func _MomentInterface_ListMoment0_HTTP_Handler(srv MomentInterfaceHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
-		var in ListCartItemReq
+		var in ListMomentReq
 		if err := ctx.Bind(&in); err != nil {
 			return err
 		}
-		http.SetOperation(ctx, "/moment.interface.v1.MomentInterface/ListCartItem")
+		http.SetOperation(ctx, "/moment.interface.v1.MomentInterface/ListMoment")
 		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListCartItem(ctx, req.(*ListCartItemReq))
+			return srv.ListMoment(ctx, req.(*ListMomentReq))
 		})
 		out, err := h(ctx, &in)
 		if err != nil {
 			return err
 		}
-		reply := out.(*ListCartItemReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _MomentInterface_AddCartItem0_HTTP_Handler(srv MomentInterfaceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in AddCartItemReq
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/moment.interface.v1.MomentInterface/AddCartItem")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.AddCartItem(ctx, req.(*AddCartItemReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*AddCartItemReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _MomentInterface_CreateOrder0_HTTP_Handler(srv MomentInterfaceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in CreateOrderReq
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/moment.interface.v1.MomentInterface/CreateOrder")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.CreateOrder(ctx, req.(*CreateOrderReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*CreateOrderReply)
-		return ctx.Result(200, reply)
-	}
-}
-
-func _MomentInterface_ListOrder0_HTTP_Handler(srv MomentInterfaceHTTPServer) func(ctx http.Context) error {
-	return func(ctx http.Context) error {
-		var in ListOrderReq
-		if err := ctx.Bind(&in); err != nil {
-			return err
-		}
-		http.SetOperation(ctx, "/moment.interface.v1.MomentInterface/ListOrder")
-		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
-			return srv.ListOrder(ctx, req.(*ListOrderReq))
-		})
-		out, err := h(ctx, &in)
-		if err != nil {
-			return err
-		}
-		reply := out.(*ListOrderReply)
+		reply := out.(*ListMomentReply)
 		return ctx.Result(200, reply)
 	}
 }
 
 type MomentInterfaceHTTPClient interface {
-	AddCartItem(ctx context.Context, req *AddCartItemReq, opts ...http.CallOption) (rsp *AddCartItemReply, err error)
 	CreateAddress(ctx context.Context, req *CreateAddressReq, opts ...http.CallOption) (rsp *CreateAddressReply, err error)
 	CreateCard(ctx context.Context, req *CreateCardReq, opts ...http.CallOption) (rsp *CreateCardReply, err error)
-	CreateOrder(ctx context.Context, req *CreateOrderReq, opts ...http.CallOption) (rsp *CreateOrderReply, err error)
+	CreateMoment(ctx context.Context, req *CreateMomentReq, opts ...http.CallOption) (rsp *CreateMomentReply, err error)
 	DeleteCard(ctx context.Context, req *DeleteCardReq, opts ...http.CallOption) (rsp *DeleteCardReply, err error)
 	GetAddress(ctx context.Context, req *GetAddressReq, opts ...http.CallOption) (rsp *GetAddressReply, err error)
 	GetCard(ctx context.Context, req *GetCardReq, opts ...http.CallOption) (rsp *GetCardReply, err error)
-	GetTag(ctx context.Context, req *GetTagReq, opts ...http.CallOption) (rsp *GetTagReply, err error)
+	GetMoment(ctx context.Context, req *GetMomentReq, opts ...http.CallOption) (rsp *GetMomentReply, err error)
 	ListAddress(ctx context.Context, req *ListAddressReq, opts ...http.CallOption) (rsp *ListAddressReply, err error)
 	ListCard(ctx context.Context, req *ListCardReq, opts ...http.CallOption) (rsp *ListCardReply, err error)
-	ListCartItem(ctx context.Context, req *ListCartItemReq, opts ...http.CallOption) (rsp *ListCartItemReply, err error)
-	ListOrder(ctx context.Context, req *ListOrderReq, opts ...http.CallOption) (rsp *ListOrderReply, err error)
-	ListTag(ctx context.Context, req *ListTagReq, opts ...http.CallOption) (rsp *ListTagReply, err error)
+	ListMoment(ctx context.Context, req *ListMomentReq, opts ...http.CallOption) (rsp *ListMomentReply, err error)
 	Login(ctx context.Context, req *LoginReq, opts ...http.CallOption) (rsp *LoginReply, err error)
 	Logout(ctx context.Context, req *LogoutReq, opts ...http.CallOption) (rsp *LogoutReply, err error)
 	Register(ctx context.Context, req *RegisterReq, opts ...http.CallOption) (rsp *RegisterReply, err error)
@@ -397,19 +328,6 @@ type MomentInterfaceHTTPClientImpl struct {
 
 func NewMomentInterfaceHTTPClient(client *http.Client) MomentInterfaceHTTPClient {
 	return &MomentInterfaceHTTPClientImpl{client}
-}
-
-func (c *MomentInterfaceHTTPClientImpl) AddCartItem(ctx context.Context, in *AddCartItemReq, opts ...http.CallOption) (*AddCartItemReply, error) {
-	var out AddCartItemReply
-	pattern := "/v1/cart"
-	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation("/moment.interface.v1.MomentInterface/AddCartItem"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
 }
 
 func (c *MomentInterfaceHTTPClientImpl) CreateAddress(ctx context.Context, in *CreateAddressReq, opts ...http.CallOption) (*CreateAddressReply, error) {
@@ -438,11 +356,11 @@ func (c *MomentInterfaceHTTPClientImpl) CreateCard(ctx context.Context, in *Crea
 	return &out, err
 }
 
-func (c *MomentInterfaceHTTPClientImpl) CreateOrder(ctx context.Context, in *CreateOrderReq, opts ...http.CallOption) (*CreateOrderReply, error) {
-	var out CreateOrderReply
-	pattern := "/v1/orders"
+func (c *MomentInterfaceHTTPClientImpl) CreateMoment(ctx context.Context, in *CreateMomentReq, opts ...http.CallOption) (*CreateMomentReply, error) {
+	var out CreateMomentReply
+	pattern := "/v1/moments"
 	path := binding.EncodeURL(pattern, in, false)
-	opts = append(opts, http.Operation("/moment.interface.v1.MomentInterface/CreateOrder"))
+	opts = append(opts, http.Operation("/moment.interface.v1.MomentInterface/CreateMoment"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
@@ -490,13 +408,13 @@ func (c *MomentInterfaceHTTPClientImpl) GetCard(ctx context.Context, in *GetCard
 	return &out, err
 }
 
-func (c *MomentInterfaceHTTPClientImpl) GetTag(ctx context.Context, in *GetTagReq, opts ...http.CallOption) (*GetTagReply, error) {
-	var out GetTagReply
-	pattern := "/v1/catalog/tags/{id}"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/moment.interface.v1.MomentInterface/GetTag"))
+func (c *MomentInterfaceHTTPClientImpl) GetMoment(ctx context.Context, in *GetMomentReq, opts ...http.CallOption) (*GetMomentReply, error) {
+	var out GetMomentReply
+	pattern := "/v1/moments"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/moment.interface.v1.MomentInterface/GetMoment"))
 	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
+	err := c.cc.Invoke(ctx, "POST", path, in, &out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -529,37 +447,11 @@ func (c *MomentInterfaceHTTPClientImpl) ListCard(ctx context.Context, in *ListCa
 	return &out, err
 }
 
-func (c *MomentInterfaceHTTPClientImpl) ListCartItem(ctx context.Context, in *ListCartItemReq, opts ...http.CallOption) (*ListCartItemReply, error) {
-	var out ListCartItemReply
-	pattern := "/v1/cart"
+func (c *MomentInterfaceHTTPClientImpl) ListMoment(ctx context.Context, in *ListMomentReq, opts ...http.CallOption) (*ListMomentReply, error) {
+	var out ListMomentReply
+	pattern := "/v1/moments"
 	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/moment.interface.v1.MomentInterface/ListCartItem"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *MomentInterfaceHTTPClientImpl) ListOrder(ctx context.Context, in *ListOrderReq, opts ...http.CallOption) (*ListOrderReply, error) {
-	var out ListOrderReply
-	pattern := "/v1/orders"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/moment.interface.v1.MomentInterface/ListOrder"))
-	opts = append(opts, http.PathTemplate(pattern))
-	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return &out, err
-}
-
-func (c *MomentInterfaceHTTPClientImpl) ListTag(ctx context.Context, in *ListTagReq, opts ...http.CallOption) (*ListTagReply, error) {
-	var out ListTagReply
-	pattern := "/v1/catalog/tags"
-	path := binding.EncodeURL(pattern, in, true)
-	opts = append(opts, http.Operation("/moment.interface.v1.MomentInterface/ListTag"))
+	opts = append(opts, http.Operation("/moment.interface.v1.MomentInterface/ListMoment"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "GET", path, nil, &out, opts...)
 	if err != nil {
