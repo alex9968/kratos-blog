@@ -9,4 +9,5 @@ var ProviderSet = wire.NewSet(
 	NewUserUseCase,
 	NewTagUseCase,
 	NewMomentUseCase,
+	NewCardUseCase,
 )

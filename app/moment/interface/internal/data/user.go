@@ -5,9 +5,8 @@ import (
 	"errors"
 
 	"github.com/go-kratos/kratos/v2/log"
-	"kratos-blog/app/moment/interface/internal/biz"
-
 	usV1 "kratos-blog/api/user/service/v1"
+	"kratos-blog/app/moment/interface/internal/biz"
 )
 
 var _ biz.UserRepo = (*userRepo)(nil)
@@ -65,6 +64,18 @@ func (rp *userRepo) GetUsers(ctx context.Context, id int64) (*biz.User, error) {
 	// 	images = append(images, biz.Image{URL: x.Url})
 	// }
 	return &biz.User{
+		Id: reply.Id,
+	}, err
+}
+
+func (rp *userRepo) GetCard(ctx context.Context, id int64) (*biz.Card, error) {
+	reply, err := rp.data.uc.GetCard(ctx, &usV1.GetCardReq{
+		Id: id,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &biz.Card{
 		Id: reply.Id,
 	}, err
 }

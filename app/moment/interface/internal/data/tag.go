@@ -2,6 +2,8 @@ package data
 
 import (
 	"context"
+	"encoding/json"
+	"database/sql/driver"
 
 	"kratos-blog/app/moment/interface/internal/biz"
 	"kratos-blog/pkg/util/pagination"
@@ -20,13 +22,22 @@ type Image struct {
 	URL string
 }
 
+func (i Image) Value() (driver.Value, error) {
+	return json.Marshal(i)
+}
+
+func (i *Image) Scan(data interface{}) error {
+	return json.Unmarshal(data.([]byte), &i)
+}
+
+
 type Tag struct {
 	gorm.Model
 	UserId     uint
 	Name        string
 	Description string
 	Count       int64
-	Images      []Image
+	Images      []Image `gorm:"column:images;type:text"`
 }
 
 func NewTagRepo(data *Data, logger log.Logger) biz.TagRepo {

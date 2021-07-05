@@ -2107,9 +2107,9 @@ func (m *DeleteCardReq) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetUid() <= 0 {
+	if m.GetId() <= 0 {
 		err := DeleteCardReqValidationError{
-			field:  "Uid",
+			field:  "Id",
 			reason: "value must be greater than 0",
 		}
 		if !all {

@@ -20,9 +20,9 @@ type momentRepo struct {
 
 type Moment struct {
 	gorm.Model
-	Id        int64
-	UserId    int64
-	Content string
+	Id int64
+	UserId    int64   `gorm:"column:user_id"`
+	Content string `gorm:"column:content"`
 }
 
 func NewMomentRepo(data *Data, logger log.Logger) biz.MomentRepo {

@@ -160,7 +160,7 @@ message GetCardReply {
 }
 
 message DeleteCardReq {
-    int64 uid = 1  [(validate.rules).int64.gt = 0];
+    int64 id = 1  [(validate.rules).int64.gt = 0];
 }
 
 message DeleteCardReply {

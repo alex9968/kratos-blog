@@ -14,13 +14,15 @@ type MomentInterface struct {
 	v1.UnimplementedMomentInterfaceServer
 
 	uc *biz.UserUseCase
+	cc *biz.CardUseCase
 
 	log *log.Helper
 }
 
-func NewMomentInterface(uc *biz.UserUseCase, logger log.Logger) *MomentInterface {
+func NewMomentInterface(uc *biz.UserUseCase,cc *biz.CardUseCase, logger log.Logger) *MomentInterface {
 	return &MomentInterface{
 		log: log.NewHelper(log.With(logger, "module", "service/interface")),
 		uc:  uc,
+		cc: cc,
 	}
 }

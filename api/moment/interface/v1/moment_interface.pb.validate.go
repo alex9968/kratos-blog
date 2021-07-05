@@ -2289,6 +2289,8 @@ func (m *CreateCardReq) validate(all bool) error {
 
 	// no validation rules for Expires
 
+	// no validation rules for Name
+
 	if len(errors) > 0 {
 		return CreateCardReqMultiError(errors)
 	}
@@ -2596,6 +2598,8 @@ func (m *GetCardReply) validate(all bool) error {
 	// no validation rules for Ccv
 
 	// no validation rules for Expires
+
+	// no validation rules for Name
 
 	if len(errors) > 0 {
 		return GetCardReplyMultiError(errors)
@@ -3664,6 +3668,8 @@ func (m *ListCardReply_Card) validate(all bool) error {
 	// no validation rules for Ccv
 
 	// no validation rules for Expires
+
+	// no validation rules for Name
 
 	if len(errors) > 0 {
 		return ListCardReply_CardMultiError(errors)

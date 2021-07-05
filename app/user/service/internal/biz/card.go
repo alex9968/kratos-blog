@@ -30,18 +30,18 @@ func NewCardUseCase(repo CardRepo, logger log.Logger) *CardUseCase {
 	return &CardUseCase{repo: repo, log: log.NewHelper(log.With(logger, "module", "usecase/card"))}
 }
 
-func (uc *CardUseCase) Create(ctx context.Context, u *Card) (*Card, error) {
-	return uc.repo.CreateCard(ctx, u)
+func (cc *CardUseCase) Create(ctx context.Context, u *Card) (*Card, error) {
+	return cc.repo.CreateCard(ctx, u)
 }
 
-func (uc *CardUseCase) Get(ctx context.Context, id int64) (*Card, error) {
-	return uc.repo.GetCard(ctx, id)
+func (cc *CardUseCase) Get(ctx context.Context, id int64) (*Card, error) {
+	return cc.repo.GetCard(ctx, id)
 }
 
-func (uc *CardUseCase) List(ctx context.Context, uid int64) ([]*Card, error) {
-	return uc.repo.ListCard(ctx, uid)
+func (cc *CardUseCase) List(ctx context.Context, uid int64) ([]*Card, error) {
+	return cc.repo.ListCard(ctx, uid)
 }
 
-func (uc *CardUseCase) Delete(ctx context.Context, uid int64) (bool, error) {
-	return uc.repo.DeleteCard(ctx, uid)
+func (cc *CardUseCase) Delete(ctx context.Context, uid int64) (bool, error) {
+	return cc.repo.DeleteCard(ctx, uid)
 }

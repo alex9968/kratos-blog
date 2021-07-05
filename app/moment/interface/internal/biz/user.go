@@ -41,3 +41,5 @@ func (uc *UserUseCase) Login(ctx context.Context, u *User) (string, error) {
 func (uc *UserUseCase) Logout(ctx context.Context, u *User) error {
 	return nil
 }
+
+
