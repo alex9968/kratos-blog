@@ -7,23 +7,40 @@ import (
 	"kratos-blog/app/moment/interface/internal/biz"
 )
 
-func (s *MomentInterface) List(ctx context.Context, req *v1.RegisterReq) (*v1.RegisterReply, error) {
-	rv, err := s.uc.Register(ctx, &biz.User{
-		Username: req.Username,
-		Password: req.Password,
+
+func (s *MomentInterface) GetMoment(ctx context.Context, req *v1.GetMomentReq) (*v1.GetMomentReply, error) {
+	rv, err := s.mc.Create(ctx, &biz.Moment{
+		Id: req.Id,
 	})
-	return &v1.RegisterReply{
-		Uid: rv.Id,
+	return &v1.GetMomentReply{
+		Id: rv.Id,
 	}, err
 }
 
-func (s *MomentInterface) Create(ctx context.Context, req *v1.LoginReq) (*v1.LoginReply, error) {
-	rv, err := s.uc.Login(ctx, &biz.User{
-		Username: req.Username,
-		Password: req.Password,
+
+func (s *MomentInterface) ListMoment(ctx context.Context, req *v1.ListMomentReq) (*v1.ListMomentReply, error) {
+	rv, err := s.mc.List(ctx, req.PageNum, req.PageSize)
+	if err != nil {
+		return nil, err
+	}
+	rs := make([]*v1.ListMomentReply_Moment, 0)
+	for _, v := range rv {
+		rs = append(rs, &v1.ListMomentReply_Moment{
+			Content: v.Content,
+			Id:      v.Id,
+		})
+	}
+	return &v1.ListMomentReply{
+		Results: rs,
+	}, err
+}
+
+func (s *MomentInterface) CreateMoment(ctx context.Context, req *v1.CreateMomentReq) (*v1.CreateMomentReply, error) {
+	rv, err := s.mc.Create(ctx, &biz.Moment{
+		Content: req.Content,
 	})
-	return &v1.LoginReply{
-		Token: rv,
+	return &v1.CreateMomentReply{
+		Id: rv.Id,
 	}, err
 }
 

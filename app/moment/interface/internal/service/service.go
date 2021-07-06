@@ -15,6 +15,7 @@ type MomentInterface struct {
 
 	uc *biz.UserUseCase
 	cc *biz.CardUseCase
+	mc *biz.MomentUseCase
 
 	log *log.Helper
 }

@@ -32,10 +32,10 @@ func NewMomentUseCase(repo MomentRepo, logger log.Logger) *MomentUseCase {
 	}
 }
 
-func (uc *MomentUseCase) Create(ctx context.Context, u *Moment) (*Moment, error) {
-	return uc.repo.CreateMoment(ctx, u)
+func (mc *MomentUseCase) Create(ctx context.Context, u *Moment) (*Moment, error) {
+	return mc.repo.CreateMoment(ctx, u)
 }
 
-func (uc *MomentUseCase) List(ctx context.Context, u *Moment) ([]*Moment, error) {
-	return uc.repo.ListMoment(ctx, 1, 10)
+func (mc *MomentUseCase) List(ctx context.Context,pageNum, pageSize int64) ([]*Moment, error) {
+	return mc.repo.ListMoment(ctx, pageNum, pageSize)
 }
