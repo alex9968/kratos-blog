@@ -17,6 +17,7 @@ type MomentRepo interface {
 	GetMoment(ctx context.Context, id int64) (*Moment, error)
 	ListMoment(ctx context.Context, pageNum, pageSize int64) ([]*Moment, error)
 	UpdateMoment(ctx context.Context, b *Moment) (*Moment, error)
+	DeleteMoment(ctx context.Context, id int64) (bool, error)
 }
 
 type MomentUseCase struct {
@@ -32,6 +33,10 @@ func NewMomentUseCase(repo MomentRepo, logger log.Logger) *MomentUseCase {
 	}
 }
 
+func (mc *MomentUseCase) Get(ctx context.Context, id int64) (*Moment, error) {
+	return mc.repo.GetMoment(ctx, id)
+}
+
 func (mc *MomentUseCase) Create(ctx context.Context, u *Moment) (*Moment, error) {
 	return mc.repo.CreateMoment(ctx, u)
 }
@@ -39,3 +44,9 @@ func (mc *MomentUseCase) Create(ctx context.Context, u *Moment) (*Moment, error)
 func (mc *MomentUseCase) List(ctx context.Context,pageNum, pageSize int64) ([]*Moment, error) {
 	return mc.repo.ListMoment(ctx, pageNum, pageSize)
 }
+
+func (mc *MomentUseCase) Delete(ctx context.Context,id int64) (bool, error) {
+	return mc.repo.DeleteMoment(ctx, id)
+}
+
+

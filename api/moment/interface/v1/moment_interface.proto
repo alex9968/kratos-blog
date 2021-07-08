@@ -280,3 +280,12 @@ message ListMomentReply {
     }
     repeated Moment results = 1;
 }
+
+
+message DeleteMomentReq {
+    int64 id = 1;
+}
+
+message DeleteMomentReply {
+    bool ok = 1;
+}

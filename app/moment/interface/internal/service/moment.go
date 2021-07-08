@@ -9,14 +9,13 @@ import (
 
 
 func (s *MomentInterface) GetMoment(ctx context.Context, req *v1.GetMomentReq) (*v1.GetMomentReply, error) {
-	rv, err := s.mc.Create(ctx, &biz.Moment{
-		Id: req.Id,
-	})
+	rv, err := s.mc.Get(ctx,  req.Id)
 	return &v1.GetMomentReply{
 		Id: rv.Id,
+		UserId: rv.UserId,
+		Content: rv.Content,
 	}, err
 }
-
 
 func (s *MomentInterface) ListMoment(ctx context.Context, req *v1.ListMomentReq) (*v1.ListMomentReply, error) {
 	rv, err := s.mc.List(ctx, req.PageNum, req.PageSize)
@@ -44,7 +43,7 @@ func (s *MomentInterface) CreateMoment(ctx context.Context, req *v1.CreateMoment
 	}, err
 }
 
-func (s *MomentInterface) Delete(ctx context.Context, req *v1.LogoutReq) (*v1.LogoutReply, error) {
-	err := s.uc.Logout(ctx, &biz.User{})
+func (s *MomentInterface) Delete(ctx context.Context, req *v1.DeleteMomentReq) (*v1.DeleteMomentReply, error) {
+	err := s.mc.Delete(ctx, req.id)
 	return &v1.LogoutReply{}, err
 }

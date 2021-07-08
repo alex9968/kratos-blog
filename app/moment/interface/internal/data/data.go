@@ -69,6 +69,7 @@ func NewData(conf *conf.Data, logger klog.Logger, uc userv1.UserClient) (*Data, 
 		log.Errorf("failed opening connection to mysql: %v", err)
 		return nil, nil, err
 	}
+	db  = db.Debug()
 
 	if err := db.AutoMigrate(&Moment{}, &Tag{}); err != nil {
 		panic(err)

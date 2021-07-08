@@ -33,8 +33,8 @@ func NewMomentRepo(data *Data, logger log.Logger) biz.MomentRepo {
 }
 
 func (r *momentRepo) CreateMoment(ctx context.Context, b *biz.Moment) (*biz.Moment, error) {
-	o := Moment{Id: b.Id, UserId: b.UserId, Content: b.Content}
-	result := r.data.db.WithContext(ctx).Create(o)
+	o := Moment{Content: b.Content}
+	result := r.data.db.WithContext(ctx).Create(&o)
 	return &biz.Moment{
 		Id: o.Id,
 	}, result.Error
@@ -45,6 +45,8 @@ func (r *momentRepo) GetMoment(ctx context.Context, id int64) (*biz.Moment, erro
 	result := r.data.db.WithContext(ctx).First(&o, id)
 	return &biz.Moment{
 		Id: o.Id,
+		UserId: o.UserId,
+		Content: o.Content,
 	}, result.Error
 }
 
@@ -80,4 +82,20 @@ func (r *momentRepo) ListMoment(ctx context.Context, pageNum, pageSize int64) ([
 		})
 	}
 	return rv, nil
+}
+
+func (r *momentRepo) DeleteMoment(ctx context.Context, id int64) (bool, error) {
+	o := Moment{}
+	result := r.data.db.WithContext(ctx).Delete(&o, b.Id)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	o.UserId = b.UserId
+	result = r.data.db.WithContext(ctx).Save(&o)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return &biz.Moment{
+		Id: o.Id,
+	}, nil
 }
