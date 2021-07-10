@@ -8,6 +8,7 @@ import (
 
 type User struct {
 	Id       int64
+	Age int8
 	Username string
 	Password string
 }

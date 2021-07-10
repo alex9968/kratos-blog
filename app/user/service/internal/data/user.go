@@ -6,6 +6,7 @@ import (
 	"kratos-blog/app/user/service/internal/biz"
 	"kratos-blog/app/user/service/internal/data/ent/user"
 	"kratos-blog/app/user/service/internal/pkg/util"
+
 	"github.com/go-kratos/kratos/v2/log"
 )
 
@@ -19,7 +20,7 @@ type userRepo struct {
 func NewUserRepo(data *Data, logger log.Logger) biz.UserRepo {
 	return &userRepo{
 		data: data,
-		log:  log.NewHelper(log.With(logger, "module", "data/server-service")),
+		log:  log.NewHelper(log.With(logger, "module", "data/user")),
 	}
 }
 
@@ -31,9 +32,10 @@ func (r *userRepo) CreateUser(ctx context.Context, u *biz.User) (*biz.User, erro
 	po, err := r.data.db.User.
 		Create().
 		SetUsername(u.Username).
+		SetAge(u.Age).
 		SetPasswordHash(ph).
 		Save(ctx)
-	return &biz.User{Id: po.ID, Username: po.Username}, err
+	return &biz.User{Id: po.ID, Age: po.Age, Username: po.Username}, err
 }
 
 func (r *userRepo) GetUser(ctx context.Context, id int64) (*biz.User, error) {
