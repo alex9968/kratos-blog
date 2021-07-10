@@ -31,6 +31,7 @@ type MomentInterfaceClient interface {
 	CreateMoment(ctx context.Context, in *CreateMomentReq, opts ...grpc.CallOption) (*CreateMomentReply, error)
 	GetMoment(ctx context.Context, in *GetMomentReq, opts ...grpc.CallOption) (*GetMomentReply, error)
 	ListMoment(ctx context.Context, in *ListMomentReq, opts ...grpc.CallOption) (*ListMomentReply, error)
+	DeleteMoment(ctx context.Context, in *DeleteMomentReq, opts ...grpc.CallOption) (*DeleteMomentReply, error)
 }
 
 type momentInterfaceClient struct {
@@ -158,6 +159,15 @@ func (c *momentInterfaceClient) ListMoment(ctx context.Context, in *ListMomentRe
 	return out, nil
 }
 
+func (c *momentInterfaceClient) DeleteMoment(ctx context.Context, in *DeleteMomentReq, opts ...grpc.CallOption) (*DeleteMomentReply, error) {
+	out := new(DeleteMomentReply)
+	err := c.cc.Invoke(ctx, "/moment.interface.v1.MomentInterface/DeleteMoment", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MomentInterfaceServer is the server API for MomentInterface service.
 // All implementations must embed UnimplementedMomentInterfaceServer
 // for forward compatibility
@@ -175,6 +185,7 @@ type MomentInterfaceServer interface {
 	CreateMoment(context.Context, *CreateMomentReq) (*CreateMomentReply, error)
 	GetMoment(context.Context, *GetMomentReq) (*GetMomentReply, error)
 	ListMoment(context.Context, *ListMomentReq) (*ListMomentReply, error)
+	DeleteMoment(context.Context, *DeleteMomentReq) (*DeleteMomentReply, error)
 	mustEmbedUnimplementedMomentInterfaceServer()
 }
 
@@ -220,6 +231,9 @@ func (UnimplementedMomentInterfaceServer) GetMoment(context.Context, *GetMomentR
 }
 func (UnimplementedMomentInterfaceServer) ListMoment(context.Context, *ListMomentReq) (*ListMomentReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMoment not implemented")
+}
+func (UnimplementedMomentInterfaceServer) DeleteMoment(context.Context, *DeleteMomentReq) (*DeleteMomentReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteMoment not implemented")
 }
 func (UnimplementedMomentInterfaceServer) mustEmbedUnimplementedMomentInterfaceServer() {}
 
@@ -468,6 +482,24 @@ func _MomentInterface_ListMoment_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MomentInterface_DeleteMoment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMomentReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MomentInterfaceServer).DeleteMoment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/moment.interface.v1.MomentInterface/DeleteMoment",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MomentInterfaceServer).DeleteMoment(ctx, req.(*DeleteMomentReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MomentInterface_ServiceDesc is the grpc.ServiceDesc for MomentInterface service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -526,6 +558,10 @@ var MomentInterface_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListMoment",
 			Handler:    _MomentInterface_ListMoment_Handler,
+		},
+		{
+			MethodName: "DeleteMoment",
+			Handler:    _MomentInterface_DeleteMoment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

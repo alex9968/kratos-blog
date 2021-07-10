@@ -86,16 +86,9 @@ func (r *momentRepo) ListMoment(ctx context.Context, pageNum, pageSize int64) ([
 
 func (r *momentRepo) DeleteMoment(ctx context.Context, id int64) (bool, error) {
 	o := Moment{}
-	result := r.data.db.WithContext(ctx).Delete(&o, b.Id)
+	result := r.data.db.WithContext(ctx).Delete(&o, id)
 	if result.Error != nil {
-		return nil, result.Error
+		return false, result.Error
 	}
-	o.UserId = b.UserId
-	result = r.data.db.WithContext(ctx).Save(&o)
-	if result.Error != nil {
-		return nil, result.Error
-	}
-	return &biz.Moment{
-		Id: o.Id,
-	}, nil
+	return true, nil
 }

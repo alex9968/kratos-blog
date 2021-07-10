@@ -93,6 +93,12 @@ service MomentInterface {
             get: "/v1/moments"
         };
     }
+
+    rpc DeleteMoment(DeleteMomentReq) returns (DeleteMomentReply) {
+        option (google.api.http) = {
+            delete: "/v1/moments"
+        };
+    }
 }
 
 message RegisterReq {

@@ -22,6 +22,7 @@ type MomentInterfaceHTTPServer interface {
 	CreateCard(context.Context, *CreateCardReq) (*CreateCardReply, error)
 	CreateMoment(context.Context, *CreateMomentReq) (*CreateMomentReply, error)
 	DeleteCard(context.Context, *DeleteCardReq) (*DeleteCardReply, error)
+	DeleteMoment(context.Context, *DeleteMomentReq) (*DeleteMomentReply, error)
 	GetAddress(context.Context, *GetAddressReq) (*GetAddressReply, error)
 	GetCard(context.Context, *GetCardReq) (*GetCardReply, error)
 	GetMoment(context.Context, *GetMomentReq) (*GetMomentReply, error)
@@ -48,6 +49,7 @@ func RegisterMomentInterfaceHTTPServer(s *http.Server, srv MomentInterfaceHTTPSe
 	r.POST("/v1/moments", _MomentInterface_CreateMoment0_HTTP_Handler(srv))
 	r.POST("/v1/moments", _MomentInterface_GetMoment0_HTTP_Handler(srv))
 	r.GET("/v1/moments", _MomentInterface_ListMoment0_HTTP_Handler(srv))
+	r.DELETE("/v1/moments", _MomentInterface_DeleteMoment0_HTTP_Handler(srv))
 }
 
 func _MomentInterface_Register0_HTTP_Handler(srv MomentInterfaceHTTPServer) func(ctx http.Context) error {
@@ -306,11 +308,31 @@ func _MomentInterface_ListMoment0_HTTP_Handler(srv MomentInterfaceHTTPServer) fu
 	}
 }
 
+func _MomentInterface_DeleteMoment0_HTTP_Handler(srv MomentInterfaceHTTPServer) func(ctx http.Context) error {
+	return func(ctx http.Context) error {
+		var in DeleteMomentReq
+		if err := ctx.Bind(&in); err != nil {
+			return err
+		}
+		http.SetOperation(ctx, "/moment.interface.v1.MomentInterface/DeleteMoment")
+		h := ctx.Middleware(func(ctx context.Context, req interface{}) (interface{}, error) {
+			return srv.DeleteMoment(ctx, req.(*DeleteMomentReq))
+		})
+		out, err := h(ctx, &in)
+		if err != nil {
+			return err
+		}
+		reply := out.(*DeleteMomentReply)
+		return ctx.Result(200, reply)
+	}
+}
+
 type MomentInterfaceHTTPClient interface {
 	CreateAddress(ctx context.Context, req *CreateAddressReq, opts ...http.CallOption) (rsp *CreateAddressReply, err error)
 	CreateCard(ctx context.Context, req *CreateCardReq, opts ...http.CallOption) (rsp *CreateCardReply, err error)
 	CreateMoment(ctx context.Context, req *CreateMomentReq, opts ...http.CallOption) (rsp *CreateMomentReply, err error)
 	DeleteCard(ctx context.Context, req *DeleteCardReq, opts ...http.CallOption) (rsp *DeleteCardReply, err error)
+	DeleteMoment(ctx context.Context, req *DeleteMomentReq, opts ...http.CallOption) (rsp *DeleteMomentReply, err error)
 	GetAddress(ctx context.Context, req *GetAddressReq, opts ...http.CallOption) (rsp *GetAddressReply, err error)
 	GetCard(ctx context.Context, req *GetCardReq, opts ...http.CallOption) (rsp *GetCardReply, err error)
 	GetMoment(ctx context.Context, req *GetMomentReq, opts ...http.CallOption) (rsp *GetMomentReply, err error)
@@ -374,6 +396,19 @@ func (c *MomentInterfaceHTTPClientImpl) DeleteCard(ctx context.Context, in *Dele
 	pattern := "/v1/user/cards/{id}"
 	path := binding.EncodeURL(pattern, in, false)
 	opts = append(opts, http.Operation("/moment.interface.v1.MomentInterface/DeleteCard"))
+	opts = append(opts, http.PathTemplate(pattern))
+	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &out, err
+}
+
+func (c *MomentInterfaceHTTPClientImpl) DeleteMoment(ctx context.Context, in *DeleteMomentReq, opts ...http.CallOption) (*DeleteMomentReply, error) {
+	var out DeleteMomentReply
+	pattern := "/v1/moments"
+	path := binding.EncodeURL(pattern, in, false)
+	opts = append(opts, http.Operation("/moment.interface.v1.MomentInterface/DeleteMoment"))
 	opts = append(opts, http.PathTemplate(pattern))
 	err := c.cc.Invoke(ctx, "DELETE", path, nil, &out, opts...)
 	if err != nil {

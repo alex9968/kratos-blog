@@ -3524,6 +3524,210 @@ var _ interface {
 	ErrorName() string
 } = ListMomentReplyValidationError{}
 
+// Validate checks the field values on DeleteMomentReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *DeleteMomentReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteMomentReq with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteMomentReqMultiError, or nil if none found.
+func (m *DeleteMomentReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteMomentReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if len(errors) > 0 {
+		return DeleteMomentReqMultiError(errors)
+	}
+	return nil
+}
+
+// DeleteMomentReqMultiError is an error wrapping multiple validation errors
+// returned by DeleteMomentReq.ValidateAll() if the designated constraints
+// aren't met.
+type DeleteMomentReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteMomentReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteMomentReqMultiError) AllErrors() []error { return m }
+
+// DeleteMomentReqValidationError is the validation error returned by
+// DeleteMomentReq.Validate if the designated constraints aren't met.
+type DeleteMomentReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteMomentReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteMomentReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteMomentReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteMomentReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteMomentReqValidationError) ErrorName() string { return "DeleteMomentReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e DeleteMomentReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteMomentReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteMomentReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteMomentReqValidationError{}
+
+// Validate checks the field values on DeleteMomentReply with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *DeleteMomentReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteMomentReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteMomentReplyMultiError, or nil if none found.
+func (m *DeleteMomentReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteMomentReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Ok
+
+	if len(errors) > 0 {
+		return DeleteMomentReplyMultiError(errors)
+	}
+	return nil
+}
+
+// DeleteMomentReplyMultiError is an error wrapping multiple validation errors
+// returned by DeleteMomentReply.ValidateAll() if the designated constraints
+// aren't met.
+type DeleteMomentReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteMomentReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteMomentReplyMultiError) AllErrors() []error { return m }
+
+// DeleteMomentReplyValidationError is the validation error returned by
+// DeleteMomentReply.Validate if the designated constraints aren't met.
+type DeleteMomentReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteMomentReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteMomentReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteMomentReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteMomentReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteMomentReplyValidationError) ErrorName() string {
+	return "DeleteMomentReplyValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteMomentReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteMomentReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteMomentReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteMomentReplyValidationError{}
+
 // Validate checks the field values on ListAddressReply_Address with the rules
 // defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.

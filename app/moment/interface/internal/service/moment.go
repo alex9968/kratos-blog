@@ -43,7 +43,9 @@ func (s *MomentInterface) CreateMoment(ctx context.Context, req *v1.CreateMoment
 	}, err
 }
 
-func (s *MomentInterface) Delete(ctx context.Context, req *v1.DeleteMomentReq) (*v1.DeleteMomentReply, error) {
-	err := s.mc.Delete(ctx, req.id)
-	return &v1.LogoutReply{}, err
+func (s *MomentInterface) DeleteMoment(ctx context.Context, req *v1.DeleteMomentReq) (*v1.DeleteMomentReply, error) {
+	ok, err := s.mc.Delete(ctx, req.Id)
+	return &v1.DeleteMomentReply{
+		Ok: ok,
+	}, err
 }
