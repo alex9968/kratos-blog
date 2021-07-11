@@ -1301,8 +1301,8 @@ type UserMutation struct {
 	id               *int64
 	username         *string
 	password_hash    *string
-	age              *int8
-	addage           *int8
+	age              *int64
+	addage           *int64
 	created_at       *time.Time
 	updated_at       *time.Time
 	clearedFields    map[string]struct{}
@@ -1475,13 +1475,13 @@ func (m *UserMutation) ResetPasswordHash() {
 }
 
 // SetAge sets the "age" field.
-func (m *UserMutation) SetAge(i int8) {
+func (m *UserMutation) SetAge(i int64) {
 	m.age = &i
 	m.addage = nil
 }
 
 // Age returns the value of the "age" field in the mutation.
-func (m *UserMutation) Age() (r int8, exists bool) {
+func (m *UserMutation) Age() (r int64, exists bool) {
 	v := m.age
 	if v == nil {
 		return
@@ -1492,7 +1492,7 @@ func (m *UserMutation) Age() (r int8, exists bool) {
 // OldAge returns the old "age" field's value of the User entity.
 // If the User object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *UserMutation) OldAge(ctx context.Context) (v int8, err error) {
+func (m *UserMutation) OldAge(ctx context.Context) (v int64, err error) {
 	if !m.op.Is(OpUpdateOne) {
 		return v, fmt.Errorf("OldAge is only allowed on UpdateOne operations")
 	}
@@ -1507,7 +1507,7 @@ func (m *UserMutation) OldAge(ctx context.Context) (v int8, err error) {
 }
 
 // AddAge adds i to the "age" field.
-func (m *UserMutation) AddAge(i int8) {
+func (m *UserMutation) AddAge(i int64) {
 	if m.addage != nil {
 		*m.addage += i
 	} else {
@@ -1516,7 +1516,7 @@ func (m *UserMutation) AddAge(i int8) {
 }
 
 // AddedAge returns the value that was added to the "age" field in this mutation.
-func (m *UserMutation) AddedAge() (r int8, exists bool) {
+func (m *UserMutation) AddedAge() (r int64, exists bool) {
 	v := m.addage
 	if v == nil {
 		return
@@ -1813,7 +1813,7 @@ func (m *UserMutation) SetField(name string, value ent.Value) error {
 		m.SetPasswordHash(v)
 		return nil
 	case user.FieldAge:
-		v, ok := value.(int8)
+		v, ok := value.(int64)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
@@ -1864,7 +1864,7 @@ func (m *UserMutation) AddedField(name string) (ent.Value, bool) {
 func (m *UserMutation) AddField(name string, value ent.Value) error {
 	switch name {
 	case user.FieldAge:
-		v, ok := value.(int8)
+		v, ok := value.(int64)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}

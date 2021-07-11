@@ -42,14 +42,14 @@ func (uu *UserUpdate) SetPasswordHash(s string) *UserUpdate {
 }
 
 // SetAge sets the "age" field.
-func (uu *UserUpdate) SetAge(i int8) *UserUpdate {
+func (uu *UserUpdate) SetAge(i int64) *UserUpdate {
 	uu.mutation.ResetAge()
 	uu.mutation.SetAge(i)
 	return uu
 }
 
 // SetNillableAge sets the "age" field if the given value is not nil.
-func (uu *UserUpdate) SetNillableAge(i *int8) *UserUpdate {
+func (uu *UserUpdate) SetNillableAge(i *int64) *UserUpdate {
 	if i != nil {
 		uu.SetAge(*i)
 	}
@@ -57,7 +57,7 @@ func (uu *UserUpdate) SetNillableAge(i *int8) *UserUpdate {
 }
 
 // AddAge adds i to the "age" field.
-func (uu *UserUpdate) AddAge(i int8) *UserUpdate {
+func (uu *UserUpdate) AddAge(i int64) *UserUpdate {
 	uu.mutation.AddAge(i)
 	return uu
 }
@@ -258,21 +258,21 @@ func (uu *UserUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := uu.mutation.Age(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt8,
+			Type:   field.TypeInt64,
 			Value:  value,
 			Column: user.FieldAge,
 		})
 	}
 	if value, ok := uu.mutation.AddedAge(); ok {
 		_spec.Fields.Add = append(_spec.Fields.Add, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt8,
+			Type:   field.TypeInt64,
 			Value:  value,
 			Column: user.FieldAge,
 		})
 	}
 	if uu.mutation.AgeCleared() {
 		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt8,
+			Type:   field.TypeInt64,
 			Column: user.FieldAge,
 		})
 	}
@@ -430,14 +430,14 @@ func (uuo *UserUpdateOne) SetPasswordHash(s string) *UserUpdateOne {
 }
 
 // SetAge sets the "age" field.
-func (uuo *UserUpdateOne) SetAge(i int8) *UserUpdateOne {
+func (uuo *UserUpdateOne) SetAge(i int64) *UserUpdateOne {
 	uuo.mutation.ResetAge()
 	uuo.mutation.SetAge(i)
 	return uuo
 }
 
 // SetNillableAge sets the "age" field if the given value is not nil.
-func (uuo *UserUpdateOne) SetNillableAge(i *int8) *UserUpdateOne {
+func (uuo *UserUpdateOne) SetNillableAge(i *int64) *UserUpdateOne {
 	if i != nil {
 		uuo.SetAge(*i)
 	}
@@ -445,7 +445,7 @@ func (uuo *UserUpdateOne) SetNillableAge(i *int8) *UserUpdateOne {
 }
 
 // AddAge adds i to the "age" field.
-func (uuo *UserUpdateOne) AddAge(i int8) *UserUpdateOne {
+func (uuo *UserUpdateOne) AddAge(i int64) *UserUpdateOne {
 	uuo.mutation.AddAge(i)
 	return uuo
 }
@@ -670,21 +670,21 @@ func (uuo *UserUpdateOne) sqlSave(ctx context.Context) (_node *User, err error) 
 	}
 	if value, ok := uuo.mutation.Age(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt8,
+			Type:   field.TypeInt64,
 			Value:  value,
 			Column: user.FieldAge,
 		})
 	}
 	if value, ok := uuo.mutation.AddedAge(); ok {
 		_spec.Fields.Add = append(_spec.Fields.Add, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt8,
+			Type:   field.TypeInt64,
 			Value:  value,
 			Column: user.FieldAge,
 		})
 	}
 	if uuo.mutation.AgeCleared() {
 		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt8,
+			Type:   field.TypeInt64,
 			Column: user.FieldAge,
 		})
 	}

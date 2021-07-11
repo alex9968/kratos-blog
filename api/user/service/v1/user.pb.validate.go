@@ -55,16 +55,7 @@ func (m *GetUserReq) validate(all bool) error {
 
 	var errors []error
 
-	if m.GetId() <= 0 {
-		err := GetUserReqValidationError{
-			field:  "Id",
-			reason: "value must be greater than 0",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for Id
 
 	if len(errors) > 0 {
 		return GetUserReqMultiError(errors)
@@ -243,6 +234,261 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = GetUserReplyValidationError{}
+
+// Validate checks the field values on GetUserMapReq with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetUserMapReq) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserMapReq with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in GetUserMapReqMultiError, or
+// nil if none found.
+func (m *GetUserMapReq) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserMapReq) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	_GetUserMapReq_Ids_Unique := make(map[int64]struct{}, len(m.GetIds()))
+
+	for idx, item := range m.GetIds() {
+		_, _ = idx, item
+
+		if _, exists := _GetUserMapReq_Ids_Unique[item]; exists {
+			err := GetUserMapReqValidationError{
+				field:  fmt.Sprintf("Ids[%v]", idx),
+				reason: "repeated value must contain unique items",
+			}
+			if !all {
+				return err
+			}
+			errors = append(errors, err)
+		} else {
+			_GetUserMapReq_Ids_Unique[item] = struct{}{}
+		}
+
+		// no validation rules for Ids[idx]
+	}
+
+	if len(errors) > 0 {
+		return GetUserMapReqMultiError(errors)
+	}
+	return nil
+}
+
+// GetUserMapReqMultiError is an error wrapping multiple validation errors
+// returned by GetUserMapReq.ValidateAll() if the designated constraints
+// aren't met.
+type GetUserMapReqMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserMapReqMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserMapReqMultiError) AllErrors() []error { return m }
+
+// GetUserMapReqValidationError is the validation error returned by
+// GetUserMapReq.Validate if the designated constraints aren't met.
+type GetUserMapReqValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserMapReqValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserMapReqValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserMapReqValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserMapReqValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserMapReqValidationError) ErrorName() string { return "GetUserMapReqValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetUserMapReqValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserMapReq.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserMapReqValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserMapReqValidationError{}
+
+// Validate checks the field values on GetUserMapReply with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetUserMapReply) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserMapReply with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetUserMapReplyMultiError, or nil if none found.
+func (m *GetUserMapReply) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserMapReply) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for key, val := range m.GetUsers() {
+		_ = val
+
+		// no validation rules for Users[key]
+
+		if all {
+			switch v := interface{}(val).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, GetUserMapReplyValidationError{
+						field:  fmt.Sprintf("Users[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, GetUserMapReplyValidationError{
+						field:  fmt.Sprintf("Users[%v]", key),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(val).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return GetUserMapReplyValidationError{
+					field:  fmt.Sprintf("Users[%v]", key),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if len(errors) > 0 {
+		return GetUserMapReplyMultiError(errors)
+	}
+	return nil
+}
+
+// GetUserMapReplyMultiError is an error wrapping multiple validation errors
+// returned by GetUserMapReply.ValidateAll() if the designated constraints
+// aren't met.
+type GetUserMapReplyMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserMapReplyMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserMapReplyMultiError) AllErrors() []error { return m }
+
+// GetUserMapReplyValidationError is the validation error returned by
+// GetUserMapReply.Validate if the designated constraints aren't met.
+type GetUserMapReplyValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserMapReplyValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserMapReplyValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserMapReplyValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserMapReplyValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserMapReplyValidationError) ErrorName() string { return "GetUserMapReplyValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetUserMapReplyValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserMapReply.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserMapReplyValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserMapReplyValidationError{}
 
 // Validate checks the field values on CreateUserReq with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
@@ -2295,6 +2541,113 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = DeleteCardReplyValidationError{}
+
+// Validate checks the field values on GetUserMapReply_User with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetUserMapReply_User) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetUserMapReply_User with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetUserMapReply_UserMultiError, or nil if none found.
+func (m *GetUserMapReply_User) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetUserMapReply_User) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Age
+
+	// no validation rules for Username
+
+	if len(errors) > 0 {
+		return GetUserMapReply_UserMultiError(errors)
+	}
+	return nil
+}
+
+// GetUserMapReply_UserMultiError is an error wrapping multiple validation
+// errors returned by GetUserMapReply_User.ValidateAll() if the designated
+// constraints aren't met.
+type GetUserMapReply_UserMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetUserMapReply_UserMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetUserMapReply_UserMultiError) AllErrors() []error { return m }
+
+// GetUserMapReply_UserValidationError is the validation error returned by
+// GetUserMapReply_User.Validate if the designated constraints aren't met.
+type GetUserMapReply_UserValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetUserMapReply_UserValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetUserMapReply_UserValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetUserMapReply_UserValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetUserMapReply_UserValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetUserMapReply_UserValidationError) ErrorName() string {
+	return "GetUserMapReply_UserValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetUserMapReply_UserValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetUserMapReply_User.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetUserMapReply_UserValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetUserMapReply_UserValidationError{}
 
 // Validate checks the field values on ListAddressReply_Address with the rules
 // defined in the proto definition for this message. If any rules are

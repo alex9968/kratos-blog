@@ -79,6 +79,8 @@ func (r *momentRepo) ListMoment(ctx context.Context, pageNum, pageSize int64) ([
 	for _, o := range os {
 		rv = append(rv, &biz.Moment{
 			Id: o.Id,
+			UserId: o.UserId,
+			Content: o.Content,
 		})
 	}
 	return rv, nil

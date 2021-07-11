@@ -6,8 +6,10 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 )
 
+// user proto 定义的req/ reply
 type User struct {
 	Id       int64
+	Age 		int64
 	Username string
 	Password string
 }
@@ -15,6 +17,7 @@ type User struct {
 type UserRepo interface {
 	Register(ctx context.Context, u *User) (*User, error)
 	Login(ctx context.Context, u *User) (string, error)
+	GetUserMap(ctx context.Context, ids []int64) (map[int64]*User, error)
 }
 
 type UserUseCase struct {
@@ -40,6 +43,11 @@ func (uc *UserUseCase) Login(ctx context.Context, u *User) (string, error) {
 
 func (uc *UserUseCase) Logout(ctx context.Context, u *User) error {
 	return nil
+}
+
+
+func (uc *UserUseCase) GetMap(ctx context.Context, ids []int64) (map[int64]*User, error) {
+	return uc.repo.GetUserMap(ctx, ids)
 }
 
 

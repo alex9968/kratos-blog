@@ -19,6 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserClient interface {
 	GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserReply, error)
+	GetUserMap(ctx context.Context, in *GetUserMapReq, opts ...grpc.CallOption) (*GetUserMapReply, error)
 	CreateUser(ctx context.Context, in *CreateUserReq, opts ...grpc.CallOption) (*CreateUserReply, error)
 	VerifyPassword(ctx context.Context, in *VerifyPasswordReq, opts ...grpc.CallOption) (*VerifyPasswordReply, error)
 	ListAddress(ctx context.Context, in *ListAddressReq, opts ...grpc.CallOption) (*ListAddressReply, error)
@@ -41,6 +42,15 @@ func NewUserClient(cc grpc.ClientConnInterface) UserClient {
 func (c *userClient) GetUser(ctx context.Context, in *GetUserReq, opts ...grpc.CallOption) (*GetUserReply, error) {
 	out := new(GetUserReply)
 	err := c.cc.Invoke(ctx, "/user.service.v1.User/GetUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) GetUserMap(ctx context.Context, in *GetUserMapReq, opts ...grpc.CallOption) (*GetUserMapReply, error) {
+	out := new(GetUserMapReply)
+	err := c.cc.Invoke(ctx, "/user.service.v1.User/GetUserMap", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -133,6 +143,7 @@ func (c *userClient) DeleteCard(ctx context.Context, in *DeleteCardReq, opts ...
 // for forward compatibility
 type UserServer interface {
 	GetUser(context.Context, *GetUserReq) (*GetUserReply, error)
+	GetUserMap(context.Context, *GetUserMapReq) (*GetUserMapReply, error)
 	CreateUser(context.Context, *CreateUserReq) (*CreateUserReply, error)
 	VerifyPassword(context.Context, *VerifyPasswordReq) (*VerifyPasswordReply, error)
 	ListAddress(context.Context, *ListAddressReq) (*ListAddressReply, error)
@@ -151,6 +162,9 @@ type UnimplementedUserServer struct {
 
 func (UnimplementedUserServer) GetUser(context.Context, *GetUserReq) (*GetUserReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
+}
+func (UnimplementedUserServer) GetUserMap(context.Context, *GetUserMapReq) (*GetUserMapReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserMap not implemented")
 }
 func (UnimplementedUserServer) CreateUser(context.Context, *CreateUserReq) (*CreateUserReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
@@ -206,6 +220,24 @@ func _User_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).GetUser(ctx, req.(*GetUserReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_GetUserMap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserMapReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserMap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/user.service.v1.User/GetUserMap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserMap(ctx, req.(*GetUserMapReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -382,6 +414,10 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUser",
 			Handler:    _User_GetUser_Handler,
+		},
+		{
+			MethodName: "GetUserMap",
+			Handler:    _User_GetUserMap_Handler,
 		},
 		{
 			MethodName: "CreateUser",

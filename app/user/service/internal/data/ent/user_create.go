@@ -35,13 +35,13 @@ func (uc *UserCreate) SetPasswordHash(s string) *UserCreate {
 }
 
 // SetAge sets the "age" field.
-func (uc *UserCreate) SetAge(i int8) *UserCreate {
+func (uc *UserCreate) SetAge(i int64) *UserCreate {
 	uc.mutation.SetAge(i)
 	return uc
 }
 
 // SetNillableAge sets the "age" field if the given value is not nil.
-func (uc *UserCreate) SetNillableAge(i *int8) *UserCreate {
+func (uc *UserCreate) SetNillableAge(i *int64) *UserCreate {
 	if i != nil {
 		uc.SetAge(*i)
 	}
@@ -239,7 +239,7 @@ func (uc *UserCreate) createSpec() (*User, *sqlgraph.CreateSpec) {
 	}
 	if value, ok := uc.mutation.Age(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt8,
+			Type:   field.TypeInt64,
 			Value:  value,
 			Column: user.FieldAge,
 		})

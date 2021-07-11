@@ -31,3 +31,6 @@ func (s *MomentInterface) Logout(ctx context.Context, req *v1.LogoutReq) (*v1.Lo
 	err := s.uc.Logout(ctx, &biz.User{})
 	return &v1.LogoutReply{}, err
 }
+
+
+

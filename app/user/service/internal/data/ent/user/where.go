@@ -108,7 +108,7 @@ func PasswordHash(v string) predicate.User {
 }
 
 // Age applies equality check predicate on the "age" field. It's identical to AgeEQ.
-func Age(v int8) predicate.User {
+func Age(v int64) predicate.User {
 	return predicate.User(func(s *sql.Selector) {
 		s.Where(sql.EQ(s.C(FieldAge), v))
 	})
@@ -351,21 +351,21 @@ func PasswordHashContainsFold(v string) predicate.User {
 }
 
 // AgeEQ applies the EQ predicate on the "age" field.
-func AgeEQ(v int8) predicate.User {
+func AgeEQ(v int64) predicate.User {
 	return predicate.User(func(s *sql.Selector) {
 		s.Where(sql.EQ(s.C(FieldAge), v))
 	})
 }
 
 // AgeNEQ applies the NEQ predicate on the "age" field.
-func AgeNEQ(v int8) predicate.User {
+func AgeNEQ(v int64) predicate.User {
 	return predicate.User(func(s *sql.Selector) {
 		s.Where(sql.NEQ(s.C(FieldAge), v))
 	})
 }
 
 // AgeIn applies the In predicate on the "age" field.
-func AgeIn(vs ...int8) predicate.User {
+func AgeIn(vs ...int64) predicate.User {
 	v := make([]interface{}, len(vs))
 	for i := range v {
 		v[i] = vs[i]
@@ -382,7 +382,7 @@ func AgeIn(vs ...int8) predicate.User {
 }
 
 // AgeNotIn applies the NotIn predicate on the "age" field.
-func AgeNotIn(vs ...int8) predicate.User {
+func AgeNotIn(vs ...int64) predicate.User {
 	v := make([]interface{}, len(vs))
 	for i := range v {
 		v[i] = vs[i]
@@ -399,28 +399,28 @@ func AgeNotIn(vs ...int8) predicate.User {
 }
 
 // AgeGT applies the GT predicate on the "age" field.
-func AgeGT(v int8) predicate.User {
+func AgeGT(v int64) predicate.User {
 	return predicate.User(func(s *sql.Selector) {
 		s.Where(sql.GT(s.C(FieldAge), v))
 	})
 }
 
 // AgeGTE applies the GTE predicate on the "age" field.
-func AgeGTE(v int8) predicate.User {
+func AgeGTE(v int64) predicate.User {
 	return predicate.User(func(s *sql.Selector) {
 		s.Where(sql.GTE(s.C(FieldAge), v))
 	})
 }
 
 // AgeLT applies the LT predicate on the "age" field.
-func AgeLT(v int8) predicate.User {
+func AgeLT(v int64) predicate.User {
 	return predicate.User(func(s *sql.Selector) {
 		s.Where(sql.LT(s.C(FieldAge), v))
 	})
 }
 
 // AgeLTE applies the LTE predicate on the "age" field.
-func AgeLTE(v int8) predicate.User {
+func AgeLTE(v int64) predicate.User {
 	return predicate.User(func(s *sql.Selector) {
 		s.Where(sql.LTE(s.C(FieldAge), v))
 	})

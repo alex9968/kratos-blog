@@ -20,7 +20,7 @@ func (User) Fields() []ent.Field {
 		field.Int64("id"),
 		field.String("username").Unique(),
 		field.String("password_hash").Sensitive(),
-		field.Int8("age").Optional(),
+		field.Int64("age").Optional(),
 		field.Time("created_at").
 			Default(time.Now).SchemaType(map[string]string{
 			dialect.MySQL: "datetime",

@@ -46,6 +46,23 @@ func (r *userRepo) GetUser(ctx context.Context, id int64) (*biz.User, error) {
 	return &biz.User{Id: po.ID, Username: po.Username}, err
 }
 
+
+func (r *userRepo) GetUserMap(ctx context.Context, ids []int64) (map[int64]*biz.User, error) {
+	data, err := r.data.db.User.Query().Where(user.IDIn(ids...)).All(ctx)
+	if err != nil {
+		return nil, err
+	}
+	res := make(map[int64]*biz.User,0)
+	for _, v := range data {
+		res[v.ID] = &biz.User{
+			Id: v.ID,
+			Age: v.Age,
+			Username: v.Username,
+		}
+	}
+	return res, nil
+}
+
 func (r *userRepo) VerifyPassword(ctx context.Context, u *biz.User) (int64, error) {
 	po, err := r.data.db.User.
 		Query().

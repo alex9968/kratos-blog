@@ -52,6 +52,23 @@ func (rp *userRepo) Logout(ctx context.Context, u *biz.User) error {
 	return nil
 }
 
+func (rp *userRepo) GetUserMap(ctx context.Context, ids []int64) (map[int64]*biz.User, error) {
+	reply, err := rp.data.uc.GetUserMap(ctx, &usV1.GetUserMapReq{
+		Ids: ids,
+	})
+	if err != nil {
+		return nil, err
+	}
+	res := make(map[int64]*biz.User, 0)
+	for k, v := range reply.Users {
+		res[k] = &biz.User{
+			Id:       v.Id,
+			Username: v.Username,
+		}
+	}
+	return res, err
+}
+
 func (rp *userRepo) GetUsers(ctx context.Context, id int64) (*biz.User, error) {
 	reply, err := rp.data.uc.GetUser(ctx, &usV1.GetUserReq{
 		Id: id,
